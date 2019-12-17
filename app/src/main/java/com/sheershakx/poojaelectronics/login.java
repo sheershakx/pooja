@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class login extends AppCompatActivity {
     EditText mobile,password;
     TextView forgotpass;
-    Button loginbtn,registerbtn;
+    Button loginbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class login extends AppCompatActivity {
         password=findViewById(R.id.password);
         forgotpass=findViewById(R.id.forgotpass);
         loginbtn=findViewById(R.id.login);
-        registerbtn=findViewById(R.id.register);
+
 
         //signup process
         loginbtn.setOnClickListener(new View.OnClickListener() {
@@ -35,19 +35,17 @@ public class login extends AppCompatActivity {
                 String Password=password.getText().toString();
 
                 if (!TextUtils.isEmpty(Mobile) && !TextUtils.isEmpty(Password)){
-                   ///call login api procedure here
+                  if (Mobile.equals("1") && Password.equals("1")){
+                   startActivity(new Intent(getApplicationContext(),mechanic_dashboard.class));
+                   finish();
+                  }
+                  else if (Mobile.equals("2") && Password.equals("2")){
+                     startActivity(new Intent(getApplicationContext(),client_dashboard.class));
+                     finish();
+                  }
                 } else Toast.makeText(login.this, "Fields can't be empty", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //register redirect
-        registerbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),signup.class));
-                finish();
-            }
-        });
-
+        
     }
 }

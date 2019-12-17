@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".client_dashboard">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Client Dashboard"
+            android:textColor="@color/Purple"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="#28A09F9F"
+        android:orientation="vertical">
+        <GridLayout
+            android:background="#FFFFFF"
+            android:layout_margin="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:orientation="horizontal"
+            android:columnCount="2">
+            <androidx.cardview.widget.CardView
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:layout_width="150dp"
+                android:layout_height="130dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/img_createpost"
+                        android:layout_centerInParent="true"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/create_content"/>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Post Problem"
+                        android:textStyle="bold"
+                        android:textColor="#CA4949"
+                        android:layout_below="@id/img_createpost"
+                        android:layout_marginTop="5dp"/>
+
+                    <Button
+                        android:id="@+id/post_client"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/transparent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="end"
+                android:layout_height="130dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/img_status"
+                        android:layout_centerInParent="true"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/view_status_icon"/>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Status"
+                        android:textStyle="bold"
+                        android:textColor="#CA4949"
+                        android:layout_below="@id/img_status"
+                        android:layout_marginTop="5dp"/>
+
+                    <Button
+                        android:id="@+id/viewstatus_client"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/transparent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
