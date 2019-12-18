@@ -11,6 +11,7 @@
         android:backgroundTint="#FFFFFF">
 
         <RelativeLayout
+            android:id="@+id/relative_layout_cstatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -69,6 +70,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/client_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/v11"

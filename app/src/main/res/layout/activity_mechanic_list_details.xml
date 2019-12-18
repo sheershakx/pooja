@@ -6,8 +6,6 @@
     android:orientation="vertical"
     tools:context=".mechanic_list_details">
 
-
-
     <TableLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -31,7 +29,7 @@
                 android:textStyle="bold" />
 
             <TextView
-
+android:id="@+id/uid_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -56,7 +54,7 @@
                 android:textStyle="bold" />
 
             <TextView
-
+                android:id="@+id/date_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -82,7 +80,7 @@
                 android:textStyle="bold" />
 
             <TextView
-
+                android:id="@+id/itemtype_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -105,7 +103,7 @@
                 android:textStyle="bold" />
 
             <TextView
-
+                android:id="@+id/spec_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -130,7 +128,7 @@
                 android:textStyle="bold" />
 
             <TextView
-
+                android:id="@+id/cost_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -155,7 +153,7 @@
                 android:textStyle="bold" />
 
             <TextView
-
+                android:id="@+id/status_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -174,6 +172,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/receivebtn_mechanic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
           android:layout_marginStart="80dp"
@@ -181,6 +180,7 @@
             android:text="Receive" />
 
         <Button
+            android:id="@+id/completedbtn_mechanic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:layout_marginStart="60dp"
@@ -189,9 +189,4 @@
 
 
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#D63535"
-        android:text="Deliver" />
 </LinearLayout>

@@ -11,7 +11,7 @@
         android:backgroundTint="#FFFFFF">
 
         <RelativeLayout
-            android:id="@+id/relative_layout_mechanic"
+            android:id="@+id/relative_layout_mechanic_delivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -26,7 +26,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/uid_mechanicstatus"
+                android:id="@+id/uid_mechanic_delivered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -37,7 +37,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/date_mechanicstatus"
+                android:id="@+id/date_mechanic_delivered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -51,25 +51,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:layout_toLeftOf="@id/date_mechanicstatus"
+                android:layout_toLeftOf="@id/date_mechanic_delivered"
                 android:text="Date:"
                 android:textColor="@color/Purple"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/status_mechanic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/v11"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Status"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/itemtype_mechanicstatus"
+                android:id="@+id/itemtype_mechanic_delivered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/v11"

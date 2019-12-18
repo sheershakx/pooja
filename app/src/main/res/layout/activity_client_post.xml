@@ -40,6 +40,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/UID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -154,6 +155,7 @@
                             android:hint="Type item specification here" />
 
                         <RadioGroup
+                          android:id="@+id/radiogroup_client"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/specification_clientpost"
@@ -181,6 +183,19 @@
 
 
                         </RadioGroup>
+
+
+                        <Button
+                            android:id="@+id/post_btn_client"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/radiogroup_client"
+                            android:layout_marginTop="20dp"
+                            android:text="Post"
+                            android:layout_marginBottom="20dp"
+                            android:layout_centerInParent="true"
+                            android:background="#8080"/>
+
 
 
                     </RelativeLayout>
