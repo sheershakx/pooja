@@ -67,11 +67,12 @@ public class mechanic_dashboard extends AppCompatActivity {
     public class mechanicdashboard extends AsyncTask<String, String, String> {
         String db_url;
 
+        
 
         @Override
         protected void onPreExecute() {
             // progressDialog= ProgressDialog.show(getApplicationContext(), "", "Loading your orders..", true);
-            db_url = "http://peitahari.000webhostapp.com/mechanic_pending.php";
+            db_url = "http://peitahari.000webhostapp.com/mechanic_dashboard.php";
 
         }
 
@@ -86,7 +87,7 @@ public class mechanic_dashboard extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(login.mechanicid, "UTF-8");
+                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
 
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();
@@ -123,8 +124,8 @@ public class mechanic_dashboard extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("id") != null) {
                         uid = jsonObject.getString("uid");
-                        itemtype = jsonObject.getString("status");
-                        date = jsonObject.getString("status");
+                        itemtype = jsonObject.getString("itemtype");
+                        date = jsonObject.getString("delivereddate");
 
 
                         //array list

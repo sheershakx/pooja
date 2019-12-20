@@ -64,7 +64,7 @@ public class client_status extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.clientid, "UTF-8");
+                String data_string = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
 
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();

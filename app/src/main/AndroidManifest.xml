@@ -2,21 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sheershakx.poojaelectronics">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mechanic_list_details"></activity>
+        <activity android:name=".admin_adduser"></activity>
+        <activity android:name=".admin_pending_list" />
+        <activity android:name=".admin_dashboard" />
+        <activity android:name=".mechanic_list_details" />
         <activity android:name=".mechanic_pending_list" />
         <activity android:name=".mechanic_dashboard" />
         <activity android:name=".client_status_detail" />
         <activity android:name=".client_status" />
         <activity android:name=".client_post" />
         <activity android:name=".client_dashboard" />
-        <activity android:name=".signup"/>
+        <activity android:name=".signup" />
         <activity android:name=".login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -51,6 +51,13 @@ public class mechanic_list_details extends AppCompatActivity {
         receivebtn.setVisibility(View.GONE);
         completedbtn.setVisibility(View.GONE);
         getincomingintent();
+
+        receivebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //call api h ere
+            }
+        });
     }
 
     private void getincomingintent() {
@@ -66,9 +73,96 @@ public class mechanic_list_details extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(getApplicationContext(), "", "Loading orders..", true);
+            progressDialog = ProgressDialog.show(mechanic_list_details.this, "", "Loading orders..", true);
 
             db_url = "http://peitahari.000webhostapp.com/mechanic_pending_details.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8");
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                StringBuffer buffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                String data = stringBuilder.toString().trim();
+
+                JSONObject jsonObject = new JSONObject(data);
+
+
+                date = jsonObject.getString("date");
+                itemtype = jsonObject.getString("itemtype");
+                spec = jsonObject.getString("spec");
+                cost = jsonObject.getString("cost");
+                status = jsonObject.getString("status");
+
+
+            } catch (ProtocolException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            Uid.setText(uid);
+            Itemtype.setText(itemtype);
+            Date.setText(date);
+            Cost.setText(cost);
+            Spec.setText(spec);
+            if (status != null && status.equals("0")) {
+                Status.setText("Pending");
+                receivebtn.setVisibility(View.VISIBLE);
+            }
+            if (status != null && status.equals("1")) {
+                Status.setText("Received");
+                completedbtn.setVisibility(View.VISIBLE);
+            }
+            if (status != null && status.equals("2")) {
+                Status.setText("Delivered");
+            }
+
+
+        }
+    }
+
+    public class updatestatus extends AsyncTask<String, String, String> {
+        String db_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            db_url = "http://peitahari.000webhostapp.com/updatestatus.php";
 
         }
 

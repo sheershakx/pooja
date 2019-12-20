@@ -46,8 +46,8 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
 
         final String Uid = uid.get(position);
         final String Status = status.get(position);
-        final String Itemtype = status.get(position);
-        final String Date = status.get(position);
+        final String Itemtype = itemtype.get(position);
+        final String Date = date.get(position);
 
 
         holder.uid.setText(Uid);
