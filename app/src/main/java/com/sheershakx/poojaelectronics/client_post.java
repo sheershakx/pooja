@@ -1,8 +1,11 @@
 package com.sheershakx.poojaelectronics;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,11 +16,25 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.UUID;
+
 public class client_post extends AppCompatActivity {
     Button post;
     TextView uid, date;
     Spinner itemtype;
-    EditText spec;
+    EditText spec, othertype;
     RadioGroup radioGroup;
 
     String radiotext;
@@ -27,6 +44,7 @@ public class client_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_post);
 
+
         //typecasting
         post = findViewById(R.id.post_btn_client);
         uid = findViewById(R.id.UID);
@@ -35,7 +53,44 @@ public class client_post extends AppCompatActivity {
         itemtype = findViewById(R.id.itemtype_clientpost);
         spec = findViewById(R.id.specification_clientpost);
 
+        othertype = findViewById(R.id.otheritem_clientpost);
+
+
         radioGroup = findViewById(R.id.radiogroup_client);
+
+        othertype.setVisibility(View.GONE);
+
+        LocalDateTime currdate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currdate = LocalDateTime.now();
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
+            date.setText(Date);
+
+        }
+
+        //generating randopm UID
+        String randomid = UUID.randomUUID().toString();
+        String trimmedrandiomuid = randomid.substring(0, 7);
+        uid.setText(trimmedrandiomuid);
+
+        final String typelist[] = {"Mobile", "Television", "AC", "Others"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, typelist);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        itemtype.setAdapter(adapter);
+
+//        itemtype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedtype = itemtype.getSelectedItem().toString();
+//                if (selectedtype != null && selectedtype.equals("Others")) {
+//                    othertype.setVisibility(View.VISIBLE);
+//                } else othertype.setVisibility(View.GONE);
+//
+//            }
+//        });
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -49,16 +104,88 @@ public class client_post extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Uid=uid.getText().toString();
-                String currdate=date.getText().toString();
-                String Itemtype=itemtype.getSelectedItem().toString().trim();
-                String specification=spec.getText().toString();
-                
-                if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(Itemtype) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext)){
-                    //call post api here
-                } else Toast.makeText(client_post.this, "Fields cannot be blank", Toast.LENGTH_SHORT).show();
-                
+                String Uid = uid.getText().toString();
+                String currdate = date.getText().toString();
+                String Itemtype = itemtype.getSelectedItem().toString().trim();
+                String Itemtypeother = othertype.getText().toString().trim();
+                String specification = spec.getText().toString();
+
+
+                if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
+                    if (Itemtype.equals("Others")) {
+                        if (Itemtypeother!=null  && !TextUtils.isEmpty(Itemtypeother)){
+                            new postproblem().execute(Uid, currdate, specification, radiotext, Itemtypeother);
+                        } else Toast.makeText(client_post.this, "Please mention itemtype(if others)", Toast.LENGTH_SHORT).show();
+
+                    } else new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype);
+                } else
+                    Toast.makeText(client_post.this, "Fields cannot be blank", Toast.LENGTH_SHORT).show();
+
             }
         });
+    }
+
+    public class postproblem extends AsyncTask<String, String, String> {
+        String db_url;
+
+
+        @Override
+        protected void onPreExecute() {
+
+            db_url = "http://peitahari.000webhostapp.com/client_post.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            String uid = args[0];
+            String date = args[1];
+            String spec = args[2];
+            String radiotext = args[3];
+            String itemtype = args[4];
+
+
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8") + "&" +
+                        URLEncoder.encode("itemtype", "UTF-8") + "=" + URLEncoder.encode(itemtype, "UTF-8") + "&" +
+                        URLEncoder.encode("spec", "UTF-8") + "=" + URLEncoder.encode(spec, "UTF-8") + "&" +
+                        URLEncoder.encode("cost", "UTF-8") + "=" + URLEncoder.encode(radiotext, "UTF-8") + "&" +
+                        URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
+
+
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return null;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Toast.makeText(client_post.this, "Posted", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }

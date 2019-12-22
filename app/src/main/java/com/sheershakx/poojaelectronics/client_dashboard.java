@@ -29,8 +29,8 @@ public class client_dashboard extends AppCompatActivity {
         viewstatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),client_status_detail.class));
-                Toast.makeText(client_dashboard.this, "Since there is no data ,1 page is hidden here", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(),client_status.class));
+
             }
         });
     }

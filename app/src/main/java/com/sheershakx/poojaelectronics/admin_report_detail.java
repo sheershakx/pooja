@@ -25,9 +25,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class client_status_detail extends AppCompatActivity {
+public class admin_report_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, status;
+    String date, itemtype, spec, cost, status,mechanicstatus,adminstatus;
     String uid;
 
     TextView Uid, Itemtype, Date, Spec, Cost, Status;
@@ -37,18 +37,16 @@ public class client_status_detail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_status_detail);
+        setContentView(R.layout.activity_admin_report_detail);
 
         receivedBtn = findViewById(R.id.received_clientdetail);
-        Uid = findViewById(R.id.uid_clientdetail);
-        Itemtype = findViewById(R.id.itemtype_clientdetail);
-        Date = findViewById(R.id.date_clientdetail);
-        Spec = findViewById(R.id.spec_clientdetail);
-        Cost = findViewById(R.id.cost_clientdetail);
-        Status = findViewById(R.id.status_clientdetail);
+        Uid = findViewById(R.id.uid_reportdetail);
+        Itemtype = findViewById(R.id.itemtype_reportdetail);
+        Date = findViewById(R.id.date_reportdetail);
+        Spec = findViewById(R.id.spec_reportdetail);
+        Cost = findViewById(R.id.cost_reportdetail);
+        Status = findViewById(R.id.status_reportdetail);
 
-        //hiding received button until deliverd status
-        receivedBtn.setVisibility(View.GONE);
         receivedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +69,7 @@ public class client_status_detail extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(client_status_detail.this, "", "Loading orders..", true);
+            progressDialog = ProgressDialog.show(admin_report_detail.this, "", "Loading orders..", true);
 
             db_url = "http://peitahari.000webhostapp.com/client_status_detail.php";
 
@@ -117,6 +115,8 @@ public class client_status_detail extends AppCompatActivity {
                 spec = jsonObject.getString("spec");
                 cost = jsonObject.getString("cost");
                 status = jsonObject.getString("status");
+                mechanicstatus = jsonObject.getString("mechanicstatus");
+                adminstatus = jsonObject.getString("adminstatus");
 
 
             } catch (ProtocolException ex) {
@@ -148,8 +148,6 @@ public class client_status_detail extends AppCompatActivity {
             }
             if (status != null && status.equals("2")) {
                 Status.setText("Delivered");
-                receivedBtn.setVisibility(View.VISIBLE);
-
             }
             if (status != null && status.equals("3")) {
                 Status.setText("Received");

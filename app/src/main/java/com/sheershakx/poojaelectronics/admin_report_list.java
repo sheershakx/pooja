@@ -1,12 +1,11 @@
 package com.sheershakx.poojaelectronics;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,33 +22,31 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class client_status extends AppCompatActivity {
-    ProgressDialog progressDialog;
+public class admin_report_list extends AppCompatActivity {
 
-    String uid,date,status;
+    String clientid, uid, itemtype, date, name;
+    ArrayList<String> ClientID = new ArrayList<String>();
     ArrayList<String> UID = new ArrayList<String>();
-    ArrayList<String> DATE = new ArrayList<String>();
-    ArrayList<String> STATUS = new ArrayList<String>();
+    ArrayList<String> Date = new ArrayList<String>();
+    ArrayList<String> ItemType = new ArrayList<String>();
+    ArrayList<String> Name = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_status);
-        new clientstatus().execute();
+        setContentView(R.layout.activity_admin_report_list);
     }
 
-    public class clientstatus extends AsyncTask<String, String, String> {
+    public class admin_pending extends AsyncTask<String, String, String> {
         String db_url;
 
 
         @Override
         protected void onPreExecute() {
-            progressDialog= ProgressDialog.show(client_status.this, "", "Loading your posts..", true);
-            db_url = "http://peitahari.000webhostapp.com/client_status.php";
+            db_url = "http://peitahari.000webhostapp.com/allreport.php";
 
         }
 
@@ -64,9 +61,6 @@ public class client_status extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
-
-                bufferedWriter.write(data_string);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
@@ -99,15 +93,22 @@ public class client_status extends AppCompatActivity {
 
                 for (int i = 0; i <= jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    if (jsonObject.getString("id") != null) {
+                    if (jsonObject.getString("uid") != null) {
+                        clientid = jsonObject.getString("clientid");
                         uid = jsonObject.getString("uid");
-                        status = jsonObject.getString("status");
+                        itemtype = jsonObject.getString("itemtype");
+                        date = jsonObject.getString("date");
+                        name = jsonObject.getString("name");
 
 
                         //array list
 
+                        ClientID.add(clientid);
                         UID.add(uid);
-                        STATUS.add(status);
+                        ItemType.add(itemtype);
+                        Date.add(date);
+                        Name.add(name);
+
                     }
                 }
 
@@ -122,16 +123,15 @@ public class client_status extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//
+
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            RecyclerView recyclerView =findViewById(R.id.recycler_client_status);
+            RecyclerView recyclerView = findViewById(R.id.recycler_admin_report);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterClientStatus(UID,STATUS));
+            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name));
 
         }
     }

@@ -5,14 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".admin_pending_list">
+    tools:context=".admin_report_list">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/Purple"></RelativeLayout>
+        android:background="@color/Purple">
+
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -22,13 +24,9 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_admin_pending"
+            android:id="@+id/recycler_admin_report"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-
-
-
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>

@@ -56,6 +56,94 @@
 
         </androidx.cardview.widget.CardView>
 
+        <GridLayout
+            android:background="#FFFFFF"
+            android:layout_margin="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:orientation="horizontal"
+            android:columnCount="2">
+            <androidx.cardview.widget.CardView
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:layout_width="150dp"
+                android:layout_height="130dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/img_createpost"
+                        android:layout_centerInParent="true"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/client_icon"/>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Client's request"
+                        android:textStyle="bold"
+                        android:textColor="#CA4949"
+                        android:layout_below="@id/img_createpost"
+                        android:layout_marginTop="5dp"/>
+
+                    <Button
+                        android:id="@+id/client_request"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/transparent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="end"
+                android:layout_height="130dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/img_status"
+                        android:layout_centerInParent="true"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/report_icon"/>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="All Report"
+                        android:textStyle="bold"
+                        android:textColor="#CA4949"
+                        android:layout_below="@id/img_status"
+                        android:layout_marginTop="5dp"/>
+
+                    <Button
+                        android:id="@+id/allreport_admin"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/transparent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+        </GridLayout>
+
 
     </LinearLayout>
 

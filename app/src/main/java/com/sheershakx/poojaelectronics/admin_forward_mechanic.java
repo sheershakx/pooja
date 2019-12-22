@@ -1,12 +1,12 @@
 package com.sheershakx.poojaelectronics;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,29 +27,34 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class client_status extends AppCompatActivity {
-    ProgressDialog progressDialog;
-
-    String uid,date,status;
-    ArrayList<String> UID = new ArrayList<String>();
-    ArrayList<String> DATE = new ArrayList<String>();
-    ArrayList<String> STATUS = new ArrayList<String>();
+public class admin_forward_mechanic extends AppCompatActivity {
+    String id, mechanicname;
+    ArrayList<String> ID = new ArrayList<String>();
+    ArrayList<String> Mechanicname = new ArrayList<String>();
+    Spinner mechanicspinner;
+    TextView selectedmechanic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_status);
-        new clientstatus().execute();
+        setContentView(R.layout.activity_admin_forward_mechanic);
+
+        mechanicspinner = findViewById(R.id.mechanic_name_spinner);
+        selectedmechanic = findViewById(R.id.selected_mechanic_name);
+
+        new getmechanicname().execute();
+
+
     }
 
-    public class clientstatus extends AsyncTask<String, String, String> {
+    public class getmechanicname extends AsyncTask<String, String, String> {
         String db_url;
 
 
         @Override
         protected void onPreExecute() {
-            progressDialog= ProgressDialog.show(client_status.this, "", "Loading your posts..", true);
-            db_url = "http://peitahari.000webhostapp.com/client_status.php";
+            // progressDialog= ProgressDialog.show(getApplicationContext(), "", "Loading your orders..", true);
+            db_url = "http://peitahari.000webhostapp.com/getmechanicname.php";
 
         }
 
@@ -64,7 +69,7 @@ public class client_status extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
+                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
 
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();
@@ -100,14 +105,15 @@ public class client_status extends AppCompatActivity {
                 for (int i = 0; i <= jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("id") != null) {
-                        uid = jsonObject.getString("uid");
-                        status = jsonObject.getString("status");
+                        id = jsonObject.getString("id");
+                        mechanicname = jsonObject.getString("name");
 
 
                         //array list
 
-                        UID.add(uid);
-                        STATUS.add(status);
+                        ID.add(id);
+                        Mechanicname.add(mechanicname);
+
                     }
                 }
 
@@ -128,10 +134,20 @@ public class client_status extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            RecyclerView recyclerView =findViewById(R.id.recycler_client_status);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterClientStatus(UID,STATUS));
+
+
+
+
+
+        }
+
+        private void setspinnerdata() {
+//            setspinnerdata();
+//            String[] mStringArray = new String[Mechanicname.size()];
+//            mStringArray = Mechanicname.toArray(mStringArray);
+//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mStringArray);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            mechanicspinner.setAdapter(adapter);
 
         }
     }
