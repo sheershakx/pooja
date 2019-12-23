@@ -38,11 +38,12 @@ public class admin_report_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_report_list);
+
+        new admin_pending().execute();
     }
 
     public class admin_pending extends AsyncTask<String, String, String> {
         String db_url;
-
 
         @Override
         protected void onPreExecute() {

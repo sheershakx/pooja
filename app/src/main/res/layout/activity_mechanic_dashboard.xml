@@ -10,14 +10,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:background="@color/Purple"
+        android:layout_weight="0.8">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Idea Service center"
-            android:textColor="@color/Purple"
+            android:fontFamily="@font/simonetta"
+            android:text="..... Service center"
+            android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -26,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_weight="9.2"
         android:orientation="vertical">
 
         <TableLayout
@@ -44,6 +46,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="Today's Date:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -56,6 +59,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your Email here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -69,7 +73,8 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Pending quantity:"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Pending Order:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -81,6 +86,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your address here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -95,7 +101,8 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Received quantity:"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Received Order:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -106,6 +113,7 @@
                     android:layout_column="1"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your gender here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -118,7 +126,8 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Delivered quantity:"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Delivered Order:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -130,6 +139,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your mobile here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -154,6 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/simonetta"
                     android:text="Delivered list"
                     android:textColor="@color/Purple"
                     android:textSize="18sp"
@@ -177,8 +188,10 @@
             android:layout_gravity="end"
             android:layout_marginEnd="20dp"
             android:background="#E1C41F1F"
+            android:fontFamily="@font/simonetta"
             android:text="View Pending list"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

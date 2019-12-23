@@ -11,14 +11,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:background="@color/Purple"
+        android:layout_weight="0.7">
 
-        <TextView
+        <TextView android:fontFamily="@font/simonetta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Pending list"
-            android:textColor="@color/Purple"
+            android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -26,7 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_weight="9.3"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView

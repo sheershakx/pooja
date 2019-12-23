@@ -29,7 +29,7 @@ import java.net.URLEncoder;
 
 public class login extends AppCompatActivity {
     EditText mobile, password;
-    TextView forgotpass;
+
     Button loginbtn;
 
     public static String usertype;
@@ -42,7 +42,6 @@ public class login extends AppCompatActivity {
         //type casting
         mobile = findViewById(R.id.mobile);
         password = findViewById(R.id.password);
-        forgotpass = findViewById(R.id.forgotpass);
         loginbtn = findViewById(R.id.login);
 
 

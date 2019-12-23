@@ -27,10 +27,10 @@ import java.net.URLEncoder;
 
 public class client_status_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, status;
+    String date, itemtype, spec, cost, status, serialno, size, model;
     String uid;
 
-    TextView Uid, Itemtype, Date, Spec, Cost, Status;
+    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model;
 
     Button receivedBtn;
 
@@ -46,6 +46,10 @@ public class client_status_detail extends AppCompatActivity {
         Spec = findViewById(R.id.spec_clientdetail);
         Cost = findViewById(R.id.cost_clientdetail);
         Status = findViewById(R.id.status_clientdetail);
+
+        Serialno = findViewById(R.id.serialno_clientdetail);
+        Size = findViewById(R.id.size_clientdetail);
+        Model = findViewById(R.id.model_clientdetail);
 
         //hiding received button until deliverd status
         receivedBtn.setVisibility(View.GONE);
@@ -117,6 +121,9 @@ public class client_status_detail extends AppCompatActivity {
                 spec = jsonObject.getString("spec");
                 cost = jsonObject.getString("cost");
                 status = jsonObject.getString("status");
+                serialno = jsonObject.getString("serialno");
+                size = jsonObject.getString("size");
+                model = jsonObject.getString("model");
 
 
             } catch (ProtocolException ex) {
@@ -138,6 +145,9 @@ public class client_status_detail extends AppCompatActivity {
             Date.setText(date);
             Cost.setText(cost);
             Spec.setText(spec);
+            Serialno.setText(serialno);
+            Size.setText(size);
+            Model.setText(model);
             if (status != null && status.equals("0")) {
                 Status.setText("Pending");
 

@@ -7,10 +7,11 @@
     tools:context=".admin_forward_mechanic">
 
     <Spinner
-        android:layout_margin="10dp"
         android:id="@+id/mechanic_name_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/simonetta" />
 
     <TextView
         android:id="@+id/selected_mechanic_name"
@@ -18,9 +19,21 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/simonetta"
         android:text="selected name"
-        android:textSize="20sp"
-        android:textColor="@color/Purple"/>
+        android:textColor="@color/Purple"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/continuebtn_forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:textSize="16sp"
+        android:fontFamily="@font/simonetta"
+        android:textStyle="bold" android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/loginbtn_design"/>
 
 
 </LinearLayout>

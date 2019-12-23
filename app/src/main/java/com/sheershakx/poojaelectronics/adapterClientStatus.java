@@ -17,11 +17,13 @@ public class adapterClientStatus extends RecyclerView.Adapter<adapterClientStatu
 
     private ArrayList<String> uid;
     private ArrayList<String> status;
+    private ArrayList<String> date;
 
 
-    public adapterClientStatus(ArrayList<String> uid, ArrayList<String> status) {
+    public adapterClientStatus(ArrayList<String> uid, ArrayList<String> status , ArrayList<String> date) {
         this.uid = uid;
         this.status = status;
+        this.date = date;
 
 
     }
@@ -42,9 +44,11 @@ public class adapterClientStatus extends RecyclerView.Adapter<adapterClientStatu
 
         final String Uid = uid.get(position);
         final String Status = status.get(position);
+        final String Date = date.get(position);
 
 
         holder.uid.setText(Uid);
+        holder.date.setText(Date);
         if (Status.equals("0")) {
             holder.status.setText("Pending");
         }
@@ -81,6 +85,7 @@ public class adapterClientStatus extends RecyclerView.Adapter<adapterClientStatu
 
         TextView uid;
         TextView status;
+        TextView date;
 
 
         RelativeLayout relativeLayout;
@@ -89,6 +94,7 @@ public class adapterClientStatus extends RecyclerView.Adapter<adapterClientStatu
             super(itemView);
             relativeLayout = itemView.findViewById(R.id.relative_layout_cstatus);
             status = itemView.findViewById(R.id.client_status);
+            date = itemView.findViewById(R.id.date_clientstatus);
             uid = itemView.findViewById(R.id.uid_clientstatus);
 
 

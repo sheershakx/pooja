@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +7,10 @@
     tools:context=".mechanic_list_details">
 
     <TableLayout
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
@@ -23,18 +23,20 @@
                 android:layout_column="0"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
                 android:text="UID:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-android:id="@+id/uid_mechanicdetail"
+                android:id="@+id/uid_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
                 android:hint="Your Email here"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -48,6 +50,7 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_column="0"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
                 android:text="Sent Date:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
@@ -60,6 +63,7 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
                 android:hint="Your address here"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -74,6 +78,7 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_column="0"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
                 android:text="Item type:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
@@ -85,11 +90,11 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
+                android:fontFamily="@font/simonetta"
                 android:hint="Your gender here"
                 android:textColor="#000"
                 android:textSize="18sp" />
         </TableRow>
-
         <TableRow>
 
             <TextView
@@ -97,18 +102,72 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_column="0"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
-                android:text="Specification:"
+                android:fontFamily="@font/simonetta"
+                android:text="Serial no:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/spec_mechanicdetail"
+                android:id="@+id/serialno_mechanicdetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
+                android:hint="Your mobile here"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
+                android:text="Size:"
+                android:textColor="@color/Purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/size_mechanicdetail"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
+                android:hint="Your mobile here"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
+                android:text="Model:"
+                android:textColor="@color/Purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/model_mechanicdetail"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
                 android:hint="Your mobile here"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -122,6 +181,35 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_column="0"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
+                android:text="Specification:"
+                android:textColor="@color/Purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/spec_mechanicdetail"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
+                android:hint="Your mobile here"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_height="wrap_content"
+
+                android:layout_column="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
                 android:text="Free/Paid:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
@@ -134,6 +222,7 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
                 android:hint="Free/Paid"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -147,6 +236,7 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_column="0"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
                 android:text="Status:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
@@ -159,6 +249,7 @@ android:id="@+id/uid_mechanicdetail"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
                 android:hint="Your spouse here"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -175,17 +266,21 @@ android:id="@+id/uid_mechanicdetail"
             android:id="@+id/receivebtn_mechanic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          android:layout_marginStart="80dp"
+            android:layout_marginStart="80dp"
             android:background="#8080"
-            android:text="Receive" />
+            android:fontFamily="@font/simonetta"
+            android:text="Receive"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/completedbtn_mechanic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_marginStart="60dp"
+            android:layout_marginStart="60dp"
             android:background="#DAC82E"
-            android:text="Completed" />
+            android:fontFamily="@font/simonetta"
+            android:text="Completed"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

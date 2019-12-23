@@ -102,12 +102,14 @@ public class client_status extends AppCompatActivity {
                     if (jsonObject.getString("id") != null) {
                         uid = jsonObject.getString("uid");
                         status = jsonObject.getString("status");
+                        date = jsonObject.getString("sentdate");
 
 
                         //array list
 
                         UID.add(uid);
                         STATUS.add(status);
+                        DATE.add(date);
                     }
                 }
 
@@ -131,7 +133,7 @@ public class client_status extends AppCompatActivity {
             progressDialog.dismiss();
             RecyclerView recyclerView =findViewById(R.id.recycler_client_status);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterClientStatus(UID,STATUS));
+            recyclerView.setAdapter(new adapterClientStatus(UID,STATUS,DATE));
 
         }
     }

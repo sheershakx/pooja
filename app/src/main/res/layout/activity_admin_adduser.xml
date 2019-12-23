@@ -10,23 +10,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:background="@color/Purple">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/simonetta"
             android:text="New User"
-            android:textSize="26sp"
             android:textColor="#fff"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:textSize="26sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_weight="9.3"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -43,6 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -55,6 +57,7 @@
                         android:id="@+id/name_createuser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/simonetta"
                         android:hint="Name" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,6 +72,7 @@
                         android:id="@+id/address_createuser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/simonetta"
                         android:hint="Address" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/simonetta"
                     android:padding="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -88,6 +93,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
+                    android:textStyle="bold"
                     android:id="@+id/createuser_createuser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,6 +101,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/loginbtn_design"
+                    android:fontFamily="@font/simonetta"
                     android:text="Create User"
                     android:textColor="#fff" />
 

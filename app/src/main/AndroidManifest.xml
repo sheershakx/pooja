@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin_forward_mechanic"></activity>
+        <activity android:name=".mechanic_deliver_action"></activity>
+        <activity android:name=".admin_forward_mechanic" />
+        <activity android:name=".admin_report_detail" />
+        <activity android:name=".admin_pending_details" />
         <activity android:name=".admin_adduser" />
+        <activity android:name=".admin_report_list" />
         <activity android:name=".admin_pending_list" />
         <activity android:name=".admin_dashboard" />
         <activity android:name=".mechanic_list_details" />
@@ -31,6 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

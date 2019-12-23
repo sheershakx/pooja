@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,13 +25,16 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class mechanic_list_details extends AppCompatActivity {
     String uid;
     ProgressDialog progressDialog;
-    String date, itemtype, status, cost, spec;
+    String date, itemtype, status, cost, spec, serialno, size, model;
     Button receivebtn, completedbtn;
-    TextView Date, Uid, Itemtype, Status, Cost, Spec;
+    TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,9 @@ public class mechanic_list_details extends AppCompatActivity {
         Status = findViewById(R.id.status_mechanicdetail);
         Cost = findViewById(R.id.cost_mechanicdetail);
         Spec = findViewById(R.id.spec_mechanicdetail);
+        Serialno = findViewById(R.id.serialno_mechanicdetail);
+        Size = findViewById(R.id.size_mechanicdetail);
+        Model = findViewById(R.id.model_mechanicdetail);
 
         receivebtn = findViewById(R.id.receivebtn_mechanic);
         completedbtn = findViewById(R.id.completedbtn_mechanic);
@@ -55,7 +62,16 @@ public class mechanic_list_details extends AppCompatActivity {
         receivebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //call api h ere
+                new update_status_mechanic().execute("http://peitahari.000webhostapp.com/update_mechanic_rec.php");
+            }
+        });
+
+        completedbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent=new Intent(mechanic_list_details.this,mechanic_deliver_action.class);
+               intent.putExtra("uid",uid);
+               mechanic_list_details.this.startActivity(intent);
             }
         });
     }
@@ -119,6 +135,9 @@ public class mechanic_list_details extends AppCompatActivity {
                 spec = jsonObject.getString("spec");
                 cost = jsonObject.getString("cost");
                 status = jsonObject.getString("status");
+                serialno = jsonObject.getString("serialno");
+                size = jsonObject.getString("size");
+                model = jsonObject.getString("model");
 
 
             } catch (ProtocolException ex) {
@@ -140,9 +159,13 @@ public class mechanic_list_details extends AppCompatActivity {
             Date.setText(date);
             Cost.setText(cost);
             Spec.setText(spec);
+            Serialno.setText(serialno);
+            Size.setText(size);
+            Model.setText(model);
             if (status != null && status.equals("0")) {
                 Status.setText("Pending");
                 receivebtn.setVisibility(View.VISIBLE);
+
             }
             if (status != null && status.equals("1")) {
                 Status.setText("Received");
@@ -156,28 +179,42 @@ public class mechanic_list_details extends AppCompatActivity {
         }
     }
 
-    public class updatestatus extends AsyncTask<String, String, String> {
-        String db_url;
+    public class update_status_mechanic extends AsyncTask<String, String, String> {
 
 
         @Override
         protected void onPreExecute() {
-            db_url = "http://peitahari.000webhostapp.com/updatestatus.php";
 
         }
 
         @Override
         protected String doInBackground(String... args) {
 
+            String api_url;
+            api_url = args[0];
+            String date = null;
+
+            LocalDateTime currdate = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                currdate = LocalDateTime.now();
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
+                date = Date;
+            }
+
+
             try {
-                URL url = new URL(db_url);
+                URL url = new URL(api_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8");
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8") + "&" +
+                        URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -196,23 +233,11 @@ public class mechanic_list_details extends AppCompatActivity {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                String data = stringBuilder.toString().trim();
-
-                JSONObject jsonObject = new JSONObject(data);
-
-
-                date = jsonObject.getString("date");
-                itemtype = jsonObject.getString("itemtype");
-                spec = jsonObject.getString("spec");
-                cost = jsonObject.getString("cost");
-                status = jsonObject.getString("status");
 
 
             } catch (ProtocolException ex) {
                 ex.printStackTrace();
             } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (JSONException ex) {
                 ex.printStackTrace();
             }
             return null;
@@ -221,24 +246,7 @@ public class mechanic_list_details extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            Uid.setText(uid);
-            Itemtype.setText(itemtype);
-            Date.setText(date);
-            Cost.setText(cost);
-            Spec.setText(spec);
-            if (status != null && status.equals("0")) {
-                Status.setText("Pending");
-                receivebtn.setVisibility(View.VISIBLE);
-            }
-            if (status != null && status.equals("1")) {
-                Status.setText("Received");
-                completedbtn.setVisibility(View.VISIBLE);
-            }
-            if (status != null && status.equals("2")) {
-                Status.setText("Delivered");
-            }
-
+            Toast.makeText(mechanic_list_details.this, "Status Changed", Toast.LENGTH_SHORT).show();
 
         }
     }

@@ -55,17 +55,17 @@ public class adapterAdminReport extends RecyclerView.Adapter<adapterAdminReport.
         holder.itemtype.setText(Itemtype);
         holder.date.setText(Date);
 
-//        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, mechanic_list_details.class);
-//                intent.putExtra("uid", Uid);
-//                intent.putExtra("clientid", Clientid);
-//                context.startActivity(intent);
-//
-//
-//            }
-//        });
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, admin_report_detail.class);
+                intent.putExtra("uid", Uid);
+                intent.putExtra("clientid", Clientid);
+                context.startActivity(intent);
+
+
+            }
+        });
     }
 
     @Override

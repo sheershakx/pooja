@@ -20,6 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/simonetta"
                 android:text="UID:"
                 android:textColor="@color/Purple"
                 android:textSize="18sp"
@@ -31,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_toRightOf="@id/v11"
+                android:fontFamily="@font/simonetta"
                 android:text="15798U"
                 android:textColor="@color/Purple"
                 android:textSize="18sp"
@@ -42,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
+                android:fontFamily="@font/simonetta"
                 android:text="2019-11-26"
                 android:textColor="@color/Purple"
                 android:textSize="18sp"
@@ -52,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_toLeftOf="@id/date_mechanicstatus"
+                android:fontFamily="@font/simonetta"
                 android:text="Date:"
                 android:textColor="@color/Purple"
                 android:textSize="18sp"
@@ -64,6 +68,7 @@
                 android:layout_below="@id/v11"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/simonetta"
                 android:text="Status"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -73,14 +78,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/v11"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_alignParentEnd="true"
-                android:text="itemtype"
-                android:textStyle="bold"
-                android:textColor="@color/Purple"
                 android:layout_marginEnd="10dp"
-                android:textSize="18sp" />
+                android:fontFamily="@font/simonetta"
+                android:text="itemtype"
+                android:textColor="@color/Purple"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

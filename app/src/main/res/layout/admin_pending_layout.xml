@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <TextView android:fontFamily="@font/simonetta"
                 android:id="@+id/name_admin_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <TextView android:fontFamily="@font/simonetta"
                 android:id="@+id/itemtype_admin_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
-            <TextView
+            <TextView android:fontFamily="@font/simonetta"
                 android:id="@+id/date_admin_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

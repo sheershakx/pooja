@@ -10,20 +10,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:background="@color/Purple"
+        android:layout_weight="0.8">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/simonetta"
             android:text="Post Problem"
-            android:textColor="@color/Purple"
+            android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#4FD558"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -34,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
+            android:fontFamily="@font/simonetta"
             android:text="UID:"
             android:textColor="@color/Purple"
             android:textSize="22sp"
@@ -46,6 +50,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
             android:layout_toRightOf="@id/v1"
+            android:fontFamily="@font/simonetta"
             android:text="15798U"
             android:textColor="@color/Purple"
             android:textSize="22sp"
@@ -58,6 +63,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/simonetta"
             android:text="2019-11-26"
             android:textColor="@color/Purple"
             android:textSize="22sp"
@@ -69,6 +75,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="5dp"
             android:layout_toLeftOf="@id/date_clientpost"
+            android:fontFamily="@font/simonetta"
             android:text="Date:"
             android:textColor="@color/Purple"
             android:textSize="22sp"
@@ -80,7 +87,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+        android:layout_weight="8.2"
         android:orientation="vertical">
 
         <ScrollView
@@ -109,7 +116,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Item Type:"
+                            android:fontFamily="@font/simonetta"
+                            android:text="Item Group:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -120,10 +128,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="5dp"
-                            android:layout_toRightOf="@id/v2" />
+                            android:layout_toRightOf="@id/v2"
+                            android:fontFamily="@font/simonetta" />
 
                         <EditText
-                            android:id="@+id/otheritem_clientpost"
+                            android:id="@+id/serialno_clientpost"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/itemtype_clientpost"
@@ -131,15 +140,38 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="5dp"
                             android:layout_toRightOf="@id/v2"
-                            android:hint="Item type(if other)" />
-
+                            android:fontFamily="@font/simonetta"
+                            android:hint="Serial no" />
+                        <EditText
+                          android:id="@+id/size_clientpost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/serialno_clientpost"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toRightOf="@id/v2"
+                            android:fontFamily="@font/simonetta"
+                            android:hint="Size" />
+                        <EditText
+                            android:id="@+id/model_clientpost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/size_clientpost"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toRightOf="@id/v2"
+                            android:fontFamily="@font/simonetta"
+                            android:hint="Model" />
                         <TextView
                             android:id="@+id/v3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/otheritem_clientpost"
+                            android:layout_below="@id/model_clientpost"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="20dp"
+                            android:fontFamily="@font/simonetta"
                             android:text="Specification:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
@@ -152,6 +184,7 @@
                             android:layout_below="@id/v3"
                             android:layout_marginHorizontal="10dp"
                             android:layout_marginTop="15dp"
+                            android:fontFamily="@font/simonetta"
                             android:hint="Type item specification here" />
 
                         <RadioGroup
@@ -167,6 +200,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="50dp"
+                                android:fontFamily="@font/simonetta"
                                 android:text="Free"
                                 android:textColor="@color/Purple"
                                 android:textSize="16sp"
@@ -176,6 +210,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="50dp"
+                                android:fontFamily="@font/simonetta"
                                 android:text="Paid"
                                 android:textColor="@color/Purple"
                                 android:textSize="16sp"
@@ -194,6 +229,7 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
                             android:background="#8080"
+                            android:fontFamily="@font/simonetta"
                             android:text="Post" />
 
 

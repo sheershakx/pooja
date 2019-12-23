@@ -28,9 +28,10 @@ import java.net.URLEncoder;
 public class admin_pending_details extends AppCompatActivity {
     String uid, clientid;
     ProgressDialog progressDialog;
-    String date, itemtype, status, cost, spec;
+    String date, itemtype, status, cost, spec, serialno, size, model;
     Button approvebtn;
-    TextView Date, Uid, Itemtype, Status, Cost, Spec;
+    String position;
+    TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +42,24 @@ public class admin_pending_details extends AppCompatActivity {
         Date = findViewById(R.id.date_admindetail);
         Uid = findViewById(R.id.uid_admindetail);
         Itemtype = findViewById(R.id.itemtype_admindetail);
-      //  Status = findViewById(R.id.status_mechanicdetail);
+        //  Status = findViewById(R.id.status_mechanicdetail);
         Cost = findViewById(R.id.cost_admindetail);
         Spec = findViewById(R.id.spec_admindetail);
+        Serialno = findViewById(R.id.serialno_admindetail);
+        Size = findViewById(R.id.size_admindetail);
+        Model = findViewById(R.id.model_admindetail);
 
 
-        approvebtn = findViewById(R.id.completedbtn_mechanic);
+        approvebtn = findViewById(R.id.completedbtn_admin);
 
         approvebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(admin_pending_details.this, admin_forward_mechanic.class);
+                intent.putExtra("uid", uid);
+                intent.putExtra("itemtype", itemtype);
+                intent.putExtra("date", date);
+                admin_pending_details.this.startActivity(intent);
             }
         });
 
@@ -62,10 +70,11 @@ public class admin_pending_details extends AppCompatActivity {
 
     private void getincomingintent() {
         Intent intent = getIntent();
-        uid = intent.getStringExtra("uid");
-        clientid = intent.getStringExtra("clientid");
-        new adminpendingdetails().execute();
-
+        if (intent.hasExtra("uid")) {
+            uid = intent.getStringExtra("uid");
+            clientid = intent.getStringExtra("clientid");
+            new adminpendingdetails().execute();
+        }
     }
 
     public class adminpendingdetails extends AsyncTask<String, String, String> {
@@ -120,6 +129,9 @@ public class admin_pending_details extends AppCompatActivity {
                 itemtype = jsonObject.getString("itemtype");
                 spec = jsonObject.getString("spec");
                 cost = jsonObject.getString("cost");
+                serialno = jsonObject.getString("serialno");
+                size = jsonObject.getString("size");
+                model = jsonObject.getString("model");
                 // status = jsonObject.getString("status");
 
 
@@ -142,6 +154,9 @@ public class admin_pending_details extends AppCompatActivity {
             Date.setText(date);
             Cost.setText(cost);
             Spec.setText(spec);
+            Serialno.setText(serialno);
+            Size.setText(size);
+            Model.setText(model);
 //            if (status != null && status.equals("0")) {
 //                Status.setText("Pending");
 //                receivebtn.setVisibility(View.VISIBLE);
@@ -207,7 +222,7 @@ public class admin_pending_details extends AppCompatActivity {
                 itemtype = jsonObject.getString("itemtype");
                 spec = jsonObject.getString("spec");
                 cost = jsonObject.getString("cost");
-              //  status = jsonObject.getString("status");
+                //  status = jsonObject.getString("status");
 
 
             } catch (ProtocolException ex) {

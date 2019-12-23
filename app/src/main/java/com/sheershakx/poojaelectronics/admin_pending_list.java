@@ -38,6 +38,7 @@ public class admin_pending_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_pending_list);
+        new admin_pending().execute();
     }
 
     public class admin_pending extends AsyncTask<String, String, String> {

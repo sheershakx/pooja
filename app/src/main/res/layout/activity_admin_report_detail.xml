@@ -10,15 +10,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+     android:background="@color/Purple"
+        android:layout_weight="0.8">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/simonetta"
             android:text="Item detail"
-            android:textColor="@color/Purple"
+           android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -28,7 +30,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_weight="9.2"
         android:orientation="vertical">
 
         <TableLayout
@@ -46,6 +48,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="UID:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -58,6 +61,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your Email here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -71,6 +75,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="Date:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -83,6 +88,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your address here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -97,6 +103,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="Item type:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -108,9 +115,88 @@
                     android:layout_column="1"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your gender here"
                     android:textColor="#000"
                     android:textSize="18sp" />
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Serial no:"
+                    android:textColor="@color/Purple"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/serialno_reportdetail"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
+                    android:hint="Your mobile here"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Size:"
+                    android:textColor="@color/Purple"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/size_reportdetail"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
+                    android:hint="Your mobile here"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Model:"
+                    android:textColor="@color/Purple"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/model_reportdetail"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
+                    android:hint="Your mobile here"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
             </TableRow>
 
             <TableRow>
@@ -120,6 +206,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="Specification:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -132,6 +219,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your mobile here"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -145,6 +233,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="Free/Paid:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -157,6 +246,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Free/Paid"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -170,6 +260,7 @@
                     android:layout_column="0"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
                     android:text="Status:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
@@ -182,15 +273,16 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:hint="Your spouse here"
-                    android:textColor="#000"
+                    android:textColor="#FF0000"
                     android:textSize="18sp" />
             </TableRow>
 
         </TableLayout>
 
 
-        <Button
+        <Button android:fontFamily="@font/simonetta"
             android:id="@+id/received_clientdetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

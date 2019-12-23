@@ -27,10 +27,10 @@ import java.net.URLEncoder;
 
 public class admin_report_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, status,mechanicstatus,adminstatus;
+    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model,m_approve,m_deliver,c_deliver,c_received,problem,mech_cost;
     String uid;
 
-    TextView Uid, Itemtype, Date, Spec, Cost, Status;
+    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model;
 
     Button receivedBtn;
 
@@ -46,6 +46,11 @@ public class admin_report_detail extends AppCompatActivity {
         Spec = findViewById(R.id.spec_reportdetail);
         Cost = findViewById(R.id.cost_reportdetail);
         Status = findViewById(R.id.status_reportdetail);
+        Serialno = findViewById(R.id.serialno_reportdetail);
+        Size = findViewById(R.id.size_reportdetail);
+        Model = findViewById(R.id.model_reportdetail);
+
+        receivedBtn.setVisibility(View.GONE);
 
         receivedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +76,7 @@ public class admin_report_detail extends AppCompatActivity {
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(admin_report_detail.this, "", "Loading orders..", true);
 
-            db_url = "http://peitahari.000webhostapp.com/client_status_detail.php";
+            db_url = "http://peitahari.000webhostapp.com/admin_report_details.php";
 
         }
 
@@ -114,9 +119,18 @@ public class admin_report_detail extends AppCompatActivity {
                 itemtype = jsonObject.getString("itemtype");
                 spec = jsonObject.getString("spec");
                 cost = jsonObject.getString("cost");
-                status = jsonObject.getString("status");
                 mechanicstatus = jsonObject.getString("mechanicstatus");
                 adminstatus = jsonObject.getString("adminstatus");
+                serialno = jsonObject.getString("serialno");
+                size = jsonObject.getString("size");
+                model = jsonObject.getString("model");
+                problem = jsonObject.getString("problem");
+                mech_cost = jsonObject.getString("mech_cost");
+
+                m_approve = jsonObject.getString("m_approvedate");
+                m_deliver = jsonObject.getString("m_deliverdate");
+                c_deliver = jsonObject.getString("c_deliverdate");
+                c_received = jsonObject.getString("c_receiveddate");
 
 
             } catch (ProtocolException ex) {
@@ -138,19 +152,26 @@ public class admin_report_detail extends AppCompatActivity {
             Date.setText(date);
             Cost.setText(cost);
             Spec.setText(spec);
-            if (status != null && status.equals("0")) {
-                Status.setText("Pending");
+            Serialno.setText(serialno);
+            Size.setText(size);
+            Model.setText(model);
+            if (adminstatus != null && adminstatus.equals("0")) {
+                Status.setText("Pending (Sent to Mechanic)");
 
             }
-            if (status != null && status.equals("1")) {
-                Status.setText("Approved");
+            if (adminstatus != null && adminstatus.equals("1")) {
+                Status.setText("Received (by Mechanic)");
 
             }
-            if (status != null && status.equals("2")) {
-                Status.setText("Delivered");
+            if (adminstatus != null && adminstatus.equals("2")) {
+                Status.setText("Delivered(by Mechanic)");
             }
-            if (status != null && status.equals("3")) {
-                Status.setText("Received");
+            if (adminstatus != null && adminstatus.equals("3")) {
+                Status.setText("Pending(Delivered to client");
+
+            }
+            if (adminstatus != null && adminstatus.equals("4")) {
+                Status.setText("Received(by Client");
 
             }
 

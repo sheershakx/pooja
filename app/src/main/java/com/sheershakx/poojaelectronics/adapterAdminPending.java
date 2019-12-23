@@ -58,7 +58,7 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, mechanic_list_details.class);
+                Intent intent = new Intent(context,admin_pending_details.class);
                 intent.putExtra("uid", Uid);
                 intent.putExtra("clientid", Clientid);
                 context.startActivity(intent);
