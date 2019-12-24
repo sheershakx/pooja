@@ -63,6 +63,7 @@ public class mechanic_list_details extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new update_status_mechanic().execute("http://peitahari.000webhostapp.com/update_mechanic_rec.php");
+                receivebtn.setEnabled(false);
             }
         });
 
@@ -72,6 +73,7 @@ public class mechanic_list_details extends AppCompatActivity {
                Intent intent=new Intent(mechanic_list_details.this,mechanic_deliver_action.class);
                intent.putExtra("uid",uid);
                mechanic_list_details.this.startActivity(intent);
+               completedbtn.setEnabled(false);
             }
         });
     }

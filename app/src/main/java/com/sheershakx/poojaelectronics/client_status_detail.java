@@ -24,6 +24,9 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class client_status_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
@@ -56,7 +59,8 @@ public class client_status_detail extends AppCompatActivity {
         receivedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // update user status and admin status into received thorugh calling api
+               new updatestatus().execute();
+               receivedBtn.setEnabled(false);
             }
         });
 
@@ -166,6 +170,77 @@ public class client_status_detail extends AppCompatActivity {
 
             }
 
+
+        }
+    }
+    public class updatestatus extends AsyncTask<String, String, String> {
+        String db_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            db_url = "http://peitahari.000webhostapp.com/updatestatus.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            String date = null;
+
+            LocalDateTime currdate = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                currdate = LocalDateTime.now();
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
+                date = Date;
+            }
+
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8");
+
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                StringBuffer buffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+            } catch (ProtocolException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            receivedBtn.setEnabled(true);
+            finish();
 
         }
     }

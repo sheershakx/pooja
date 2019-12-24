@@ -1,12 +1,11 @@
 package com.sheershakx.poojaelectronics;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,36 +22,32 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class mechanic_pending_list extends AppCompatActivity {
-    ProgressDialog progressDialog;
-    String uid,itemtype,status,date;
-
-    ArrayList<String> UID=new ArrayList<String>();
-    ArrayList<String> ITEMTYPE=new ArrayList<String>();
-    ArrayList<String> STATUS=new ArrayList<String>();
-    ArrayList<String> DATE=new ArrayList<String>();
+public class completedAll extends AppCompatActivity {
+    String clientid, uid, itemtype, date, name;
+    ArrayList<String> ClientID = new ArrayList<String>();
+    ArrayList<String> UID = new ArrayList<String>();
+    ArrayList<String> Date = new ArrayList<String>();
+    ArrayList<String> ItemType = new ArrayList<String>();
+    ArrayList<String> Name = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mechanic_pending_list);
+        setContentView(R.layout.activity_completed_all);
 
-        new mechanicpending().execute();
+        new completed().execute();
     }
 
-
-    public class mechanicpending extends AsyncTask<String, String, String> {
+    public class completed extends AsyncTask<String, String, String> {
         String db_url;
-
 
         @Override
         protected void onPreExecute() {
-            progressDialog= ProgressDialog.show(mechanic_pending_list.this, "", "Loading your orders..", true);
-            db_url = "http://peitahari.000webhostapp.com/mechanic_pending.php";
+            db_url = "http://peitahari.000webhostapp.com/completed.php";
+
         }
 
         @Override
@@ -66,9 +61,6 @@ public class mechanic_pending_list extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
-
-                bufferedWriter.write(data_string);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
@@ -101,19 +93,22 @@ public class mechanic_pending_list extends AppCompatActivity {
 
                 for (int i = 0; i <= jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    if (jsonObject.getString("id") != null) {
+                    if (jsonObject.getString("uid") != null) {
+                        clientid = jsonObject.getString("clientid");
                         uid = jsonObject.getString("uid");
-                        status = jsonObject.getString("status");
                         itemtype = jsonObject.getString("itemtype");
-                        date = jsonObject.getString("sentdate");
+                        date = jsonObject.getString("date");
+                        name = jsonObject.getString("name");
 
 
                         //array list
 
+                        ClientID.add(clientid);
                         UID.add(uid);
-                        STATUS.add(status);
-                        ITEMTYPE.add(itemtype);
-                        DATE.add(date);
+                        ItemType.add(itemtype);
+                        Date.add(date);
+                        Name.add(name);
+
                     }
                 }
 
@@ -134,10 +129,9 @@ public class mechanic_pending_list extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            RecyclerView recyclerView =findViewById(R.id.recycler_mechanic_pending);
+            RecyclerView recyclerView = findViewById(R.id.recycler_completed);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterMechanicPending(UID,STATUS,ITEMTYPE,DATE));
+            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name));
 
         }
     }

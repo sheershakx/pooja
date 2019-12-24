@@ -37,7 +37,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your Email here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your address here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -91,7 +91,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your gender here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
         </TableRow>
@@ -116,7 +116,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your mobile here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -142,7 +142,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your mobile here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -168,7 +168,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your mobile here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -195,7 +195,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your mobile here"
+
                 android:textColor="#000"
                 android:textSize="18sp" />
 
@@ -249,7 +249,6 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/simonetta"
-                android:hint="Your spouse here"
                 android:textColor="#000"
                 android:textSize="18sp" />
         </TableRow>

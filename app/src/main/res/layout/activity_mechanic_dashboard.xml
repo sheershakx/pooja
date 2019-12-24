@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".mechanic_dashboard">
@@ -12,13 +13,19 @@
         android:layout_height="0dp"
         android:background="@color/Purple"
         android:layout_weight="0.8">
+        <androidx.appcompat.widget.Toolbar
+            app:menu="@menu/menu"
+            android:id="@+id/mechanic_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <TextView
+            android:id="@+id/mechanic_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/simonetta"
-            android:text="..... Service center"
+            android:text=""
             android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />

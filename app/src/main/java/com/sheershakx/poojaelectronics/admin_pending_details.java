@@ -28,10 +28,10 @@ import java.net.URLEncoder;
 public class admin_pending_details extends AppCompatActivity {
     String uid, clientid;
     ProgressDialog progressDialog;
-    String date, itemtype, status, cost, spec, serialno, size, model;
+    String date, itemtype,status,cost,spec,serialno,size,model;
     Button approvebtn;
     String position;
-    TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model;
+    TextView Date, Uid, Itemtype,Status, Cost, Spec, Serialno, Size, Model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class admin_pending_details extends AppCompatActivity {
         Date = findViewById(R.id.date_admindetail);
         Uid = findViewById(R.id.uid_admindetail);
         Itemtype = findViewById(R.id.itemtype_admindetail);
-        //  Status = findViewById(R.id.status_mechanicdetail);
+      //   Status = findViewById(R.id.status_admindetail);
         Cost = findViewById(R.id.cost_admindetail);
         Spec = findViewById(R.id.spec_admindetail);
         Serialno = findViewById(R.id.serialno_admindetail);

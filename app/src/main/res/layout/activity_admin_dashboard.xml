@@ -13,6 +13,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.8"
         android:background="@color/Purple">
+
+
+        <androidx.appcompat.widget.Toolbar
+            app:menu="@menu/admin_menu"
+            android:id="@+id/admin_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -151,7 +158,82 @@
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:backgroundTint="#fff">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/img_mdelivered"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/client_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img_mdelivered"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/simonetta"
+                        android:text="Mechanic Delivered"
+                        android:textColor="#CA4949"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/mdelivered_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
+                android:backgroundTint="#fff">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/img_completed"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/report_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img_completed"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/simonetta"
+                        android:text="Completed Orders"
+                        android:textColor="#CA4949"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/completed_admin"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
         </GridLayout>
 

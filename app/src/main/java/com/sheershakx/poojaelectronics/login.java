@@ -34,6 +34,7 @@ public class login extends AppCompatActivity {
 
     public static String usertype;
     public static String userid;
+    public static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,7 @@ public class login extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(data);
                 usertype = jsonObject.getString("usertype");
                 userid = jsonObject.getString("userid");
+                username = jsonObject.getString("username");
 //
                 return data;
 

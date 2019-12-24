@@ -113,6 +113,7 @@ public class client_post extends AppCompatActivity {
                 if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
 
                         new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype,Serialno,Sizeno,Modelno);
+                        post.setEnabled(false);
                 } else
                     Toast.makeText(client_post.this, "Fields cannot be blank", Toast.LENGTH_SHORT).show();
 

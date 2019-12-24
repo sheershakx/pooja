@@ -73,6 +73,7 @@ public class admin_forward_mechanic extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new forwardtomechanic().execute();
+                continuebtn.setEnabled(false);
 
             }
         });

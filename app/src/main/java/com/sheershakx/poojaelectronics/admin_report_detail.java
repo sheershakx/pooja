@@ -24,13 +24,16 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class admin_report_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model,m_approve,m_deliver,c_deliver,c_received,problem,mech_cost;
+    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model, m_approve, m_deliver, c_deliver, c_received, problem, mech_cost;
     String uid;
 
-    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model;
+    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model, problemsolved, mechcost, madate, mddate, cddate, crdate;
 
     Button receivedBtn;
 
@@ -39,7 +42,7 @@ public class admin_report_detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_report_detail);
 
-        receivedBtn = findViewById(R.id.received_clientdetail);
+        receivedBtn = findViewById(R.id.received_reportdetail);
         Uid = findViewById(R.id.uid_reportdetail);
         Itemtype = findViewById(R.id.itemtype_reportdetail);
         Date = findViewById(R.id.date_reportdetail);
@@ -49,13 +52,20 @@ public class admin_report_detail extends AppCompatActivity {
         Serialno = findViewById(R.id.serialno_reportdetail);
         Size = findViewById(R.id.size_reportdetail);
         Model = findViewById(R.id.model_reportdetail);
+        problemsolved = findViewById(R.id.problem_reportdetail);
+        mechcost = findViewById(R.id.mechcost_reportdetail);
+        mddate = findViewById(R.id.mddate_reportdetail);
+        madate = findViewById(R.id.madate_reportdetail);
+        cddate = findViewById(R.id.cddate_reportdetail);
+        crdate = findViewById(R.id.crdate_reportdetail);
 
         receivedBtn.setVisibility(View.GONE);
 
         receivedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // update user status and admin status into received thorugh calling api
+                new updatestatus().execute();
+                receivedBtn.setEnabled(false);
             }
         });
 
@@ -155,6 +165,12 @@ public class admin_report_detail extends AppCompatActivity {
             Serialno.setText(serialno);
             Size.setText(size);
             Model.setText(model);
+            problemsolved.setText(problem);
+            mechcost.setText(mech_cost);
+            madate.setText(m_approve);
+            mddate.setText(m_deliver);
+            cddate.setText(c_deliver);
+            crdate.setText(c_received);
             if (adminstatus != null && adminstatus.equals("0")) {
                 Status.setText("Pending (Sent to Mechanic)");
 
@@ -165,6 +181,7 @@ public class admin_report_detail extends AppCompatActivity {
             }
             if (adminstatus != null && adminstatus.equals("2")) {
                 Status.setText("Delivered(by Mechanic)");
+                receivedBtn.setVisibility(View.VISIBLE);
             }
             if (adminstatus != null && adminstatus.equals("3")) {
                 Status.setText("Pending(Delivered to client");
@@ -175,6 +192,78 @@ public class admin_report_detail extends AppCompatActivity {
 
             }
 
+
+        }
+    }
+
+    public class updatestatus extends AsyncTask<String, String, String> {
+        String db_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            db_url = "http://peitahari.000webhostapp.com/updatestatus.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            String date = null;
+
+            LocalDateTime currdate = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                currdate = LocalDateTime.now();
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
+                date = Date;
+            }
+
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8");
+
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                StringBuffer buffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+            } catch (ProtocolException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            receivedBtn.setEnabled(true);
+            finish();
 
         }
     }
