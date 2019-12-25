@@ -30,10 +30,10 @@ import java.util.Locale;
 
 public class client_status_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, status, serialno, size, model;
+    String date, itemtype, spec, cost, status, serialno, size, model, clientproblem, problemfix,expense;
     String uid;
 
-    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model;
+    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model, ClientProblem, Problemfix,Expense;
 
     Button receivedBtn;
 
@@ -53,14 +53,17 @@ public class client_status_detail extends AppCompatActivity {
         Serialno = findViewById(R.id.serialno_clientdetail);
         Size = findViewById(R.id.size_clientdetail);
         Model = findViewById(R.id.model_clientdetail);
+        Problemfix = findViewById(R.id.problemfix_clientdetail);
+        ClientProblem = findViewById(R.id.clientproblem_clientdetail);
+        Expense=findViewById(R.id.expense_clientdetail);
 
         //hiding received button until deliverd status
         receivedBtn.setVisibility(View.GONE);
         receivedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               new updatestatus().execute();
-               receivedBtn.setEnabled(false);
+                new updatestatus().execute();
+                receivedBtn.setEnabled(false);
             }
         });
 
@@ -128,6 +131,9 @@ public class client_status_detail extends AppCompatActivity {
                 serialno = jsonObject.getString("serialno");
                 size = jsonObject.getString("size");
                 model = jsonObject.getString("model");
+                clientproblem = jsonObject.getString("clientproblem");
+                problemfix = jsonObject.getString("problem");
+                expense = jsonObject.getString("expense");
 
 
             } catch (ProtocolException ex) {
@@ -152,6 +158,9 @@ public class client_status_detail extends AppCompatActivity {
             Serialno.setText(serialno);
             Size.setText(size);
             Model.setText(model);
+            ClientProblem.setText(clientproblem);
+            Problemfix.setText(problemfix);
+            Expense.setText(expense);
             if (status != null && status.equals("0")) {
                 Status.setText("Pending");
 
@@ -173,13 +182,14 @@ public class client_status_detail extends AppCompatActivity {
 
         }
     }
+
     public class updatestatus extends AsyncTask<String, String, String> {
         String db_url;
 
 
         @Override
         protected void onPreExecute() {
-            db_url = "http://peitahari.000webhostapp.com/updatestatus.php";
+            db_url = "http://peitahari.000webhostapp.com/updatestatusclient.php";
 
         }
 

@@ -27,12 +27,13 @@ import java.util.ArrayList;
 
 public class admin_report_list extends AppCompatActivity {
 
-    String clientid, uid, itemtype, date, name;
+    String clientid, uid, itemtype, date, name,status;
     ArrayList<String> ClientID = new ArrayList<String>();
     ArrayList<String> UID = new ArrayList<String>();
     ArrayList<String> Date = new ArrayList<String>();
     ArrayList<String> ItemType = new ArrayList<String>();
     ArrayList<String> Name = new ArrayList<String>();
+    ArrayList<String> Status = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,7 @@ public class admin_report_list extends AppCompatActivity {
                         itemtype = jsonObject.getString("itemtype");
                         date = jsonObject.getString("date");
                         name = jsonObject.getString("name");
+                        status = jsonObject.getString("adminstatus");
 
 
                         //array list
@@ -109,6 +111,7 @@ public class admin_report_list extends AppCompatActivity {
                         ItemType.add(itemtype);
                         Date.add(date);
                         Name.add(name);
+                        Status.add(status);
 
                     }
                 }
@@ -132,7 +135,7 @@ public class admin_report_list extends AppCompatActivity {
         protected void onPostExecute(String s) {
             RecyclerView recyclerView = findViewById(R.id.recycler_admin_report);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name));
+            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name,Status));
 
         }
     }

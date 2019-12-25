@@ -182,13 +182,39 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/simonetta"
-                android:text="Specification:"
+                android:text="Item specification:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/spec_admindetail"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
+
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
+                android:text="Client Problem:"
+                android:textColor="@color/Purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/clientproblem_admindetail"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginLeft="5dp"
@@ -258,16 +284,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="horizontal">
         <Button
+            android:layout_marginStart="20dp"
+            android:id="@+id/acceptbtn_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#41BB24"
+            android:fontFamily="@font/simonetta"
+            android:text="Accept"
+            android:textStyle="bold" />
+        <Button
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/completedbtn_admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#DAC82E"
             android:fontFamily="@font/simonetta"
-            android:text="Receive and Forward"
+            android:text="Forward to mechanic"
             android:textStyle="bold" />
 
 

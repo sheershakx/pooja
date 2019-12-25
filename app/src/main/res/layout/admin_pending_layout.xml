@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
-        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:id="@+id/relative_layout_admin_pending"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView android:fontFamily="@font/simonetta"
+            <TextView
                 android:id="@+id/name_admin_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/simonetta"
                 android:text="Nawarang Tv center"
                 android:textColor="#E83F2C2C"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView android:fontFamily="@font/simonetta"
+            <TextView
                 android:id="@+id/itemtype_admin_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,22 +37,36 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:background="#DFBB1F"
+                android:fontFamily="@font/simonetta"
                 android:text="Television"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
-            <TextView android:fontFamily="@font/simonetta"
+            <TextView
                 android:id="@+id/date_admin_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/itemtype_admin_pending"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="10dp"
-                android:text="2019-11-11"
-                android:background="#168B23"
-                android:textColor="#FFFFFF"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textSize="20sp"/>
+                android:background="#168B23"
+                android:fontFamily="@font/simonetta"
+                android:text="2019-11-11"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/status_admin_pending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/simonetta"
+                android:text="pending"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

@@ -41,10 +41,11 @@ import java.util.Locale;
 public class mechanic_dashboard extends AppCompatActivity {
     Button pending;
 
-    String uid, itemtype, date;
+    String uid, itemtype, date,status;
     ArrayList<String> UID = new ArrayList<String>();
     ArrayList<String> ITEMTYPE = new ArrayList<String>();
     ArrayList<String> DATE = new ArrayList<String>();
+    ArrayList<String> STATUS = new ArrayList<String>();
 
     TextView mechanicnameview;
 
@@ -60,7 +61,6 @@ public class mechanic_dashboard extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.mechanic_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         //typecasting
         mechanicnameview=findViewById(R.id.mechanic_name_view);
 
@@ -69,6 +69,7 @@ public class mechanic_dashboard extends AppCompatActivity {
         received=findViewById(R.id.received_mechanicdash);
         delivered=findViewById(R.id.delivered_mechanicdash);
 
+        mechanicnameview.setText(login.username);
 
         pending = findViewById(R.id.pending_mechanic);
         pending.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +180,7 @@ public class mechanic_dashboard extends AppCompatActivity {
                         uid = jsonObject.getString("uid");
                         itemtype = jsonObject.getString("itemtype");
                         date = jsonObject.getString("delivereddate");
+                        status = jsonObject.getString("status");
 
 
                         //array list
@@ -186,6 +188,7 @@ public class mechanic_dashboard extends AppCompatActivity {
                         UID.add(uid);
                         ITEMTYPE.add(itemtype);
                         DATE.add(date);
+                        STATUS.add(status);
                     }
                 }
 
@@ -209,7 +212,7 @@ public class mechanic_dashboard extends AppCompatActivity {
             //  progressDialog.dismiss();
             RecyclerView recyclerView = findViewById(R.id.recycler_mechanic_delivered);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterMechanicDelivered(UID, ITEMTYPE, DATE));
+            recyclerView.setAdapter(new adapterMechanicDelivered(UID, ITEMTYPE, DATE,STATUS));
 
         }
     }

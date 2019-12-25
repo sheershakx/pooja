@@ -30,12 +30,13 @@ import java.util.Locale;
 
 public class admin_report_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model, m_approve, m_deliver, c_deliver, c_received, problem, mech_cost;
+    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model, m_approve, m_deliver, c_deliver, c_received, problem, mech_cost, Clientproblem;
     String uid;
 
-    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model, problemsolved, mechcost, madate, mddate, cddate, crdate;
+    TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model, problemsolved, mechcost, madate, mddate, cddate, crdate, clientproblem;
 
     Button receivedBtn;
+    Button recv_mech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,20 @@ public class admin_report_detail extends AppCompatActivity {
         madate = findViewById(R.id.madate_reportdetail);
         cddate = findViewById(R.id.cddate_reportdetail);
         crdate = findViewById(R.id.crdate_reportdetail);
+
+        recv_mech = findViewById(R.id.recv_mech_reportdetail);
+
+        clientproblem = findViewById(R.id.clientproblem_reportdetail);
+
+        recv_mech.setVisibility(View.GONE);
+
+        recv_mech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new updatestatusmech().execute();
+                recv_mech.setEnabled(false);
+            }
+        });
 
         receivedBtn.setVisibility(View.GONE);
 
@@ -136,6 +151,7 @@ public class admin_report_detail extends AppCompatActivity {
                 model = jsonObject.getString("model");
                 problem = jsonObject.getString("problem");
                 mech_cost = jsonObject.getString("mech_cost");
+                Clientproblem = jsonObject.getString("clientproblem");
 
                 m_approve = jsonObject.getString("m_approvedate");
                 m_deliver = jsonObject.getString("m_deliverdate");
@@ -171,6 +187,7 @@ public class admin_report_detail extends AppCompatActivity {
             mddate.setText(m_deliver);
             cddate.setText(c_deliver);
             crdate.setText(c_received);
+            clientproblem.setText(Clientproblem);
             if (adminstatus != null && adminstatus.equals("0")) {
                 Status.setText("Pending (Sent to Mechanic)");
 
@@ -181,15 +198,20 @@ public class admin_report_detail extends AppCompatActivity {
             }
             if (adminstatus != null && adminstatus.equals("2")) {
                 Status.setText("Delivered(by Mechanic)");
-                receivedBtn.setVisibility(View.VISIBLE);
+                recv_mech.setVisibility(View.VISIBLE);
+                // receivedBtn.setVisibility(View.VISIBLE);
             }
             if (adminstatus != null && adminstatus.equals("3")) {
                 Status.setText("Pending(Delivered to client");
 
             }
             if (adminstatus != null && adminstatus.equals("4")) {
-                Status.setText("Received(by Client");
+                Status.setText("Received(by Client)");
 
+            }
+            if (adminstatus != null && adminstatus.equals("5")) {
+                Status.setText("Received(from mechanic)");
+                receivedBtn.setVisibility(View.VISIBLE);
             }
 
 
@@ -198,7 +220,6 @@ public class admin_report_detail extends AppCompatActivity {
 
     public class updatestatus extends AsyncTask<String, String, String> {
         String db_url;
-
 
         @Override
         protected void onPreExecute() {
@@ -263,6 +284,77 @@ public class admin_report_detail extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             receivedBtn.setEnabled(true);
+            finish();
+
+        }
+    }
+
+    public class updatestatusmech extends AsyncTask<String, String, String> {
+        String db_url;
+
+        @Override
+        protected void onPreExecute() {
+            db_url = "http://peitahari.000webhostapp.com/updatestatusmech.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            String date = null;
+
+            LocalDateTime currdate = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                currdate = LocalDateTime.now();
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
+                date = Date;
+            }
+
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8");
+
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                StringBuffer buffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+            } catch (ProtocolException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            recv_mech.setEnabled(true);
             finish();
 
         }

@@ -32,9 +32,9 @@ import java.util.Locale;
 public class mechanic_list_details extends AppCompatActivity {
     String uid;
     ProgressDialog progressDialog;
-    String date, itemtype, status, cost, spec, serialno, size, model;
+    String date, itemtype, status, cost, spec, serialno, size, model, clientproblem;
     Button receivebtn, completedbtn;
-    TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model;
+    TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model, ClientProblem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class mechanic_list_details extends AppCompatActivity {
 
         receivebtn = findViewById(R.id.receivebtn_mechanic);
         completedbtn = findViewById(R.id.completedbtn_mechanic);
+        ClientProblem = findViewById(R.id.clientproblem_mechanicdetail);
 
         receivebtn.setVisibility(View.GONE);
         completedbtn.setVisibility(View.GONE);
@@ -70,10 +71,10 @@ public class mechanic_list_details extends AppCompatActivity {
         completedbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent=new Intent(mechanic_list_details.this,mechanic_deliver_action.class);
-               intent.putExtra("uid",uid);
-               mechanic_list_details.this.startActivity(intent);
-               completedbtn.setEnabled(false);
+                Intent intent = new Intent(mechanic_list_details.this, mechanic_deliver_action.class);
+                intent.putExtra("uid", uid);
+                mechanic_list_details.this.startActivity(intent);
+                completedbtn.setEnabled(false);
             }
         });
     }
@@ -140,6 +141,7 @@ public class mechanic_list_details extends AppCompatActivity {
                 serialno = jsonObject.getString("serialno");
                 size = jsonObject.getString("size");
                 model = jsonObject.getString("model");
+                clientproblem = jsonObject.getString("clientproblem");
 
 
             } catch (ProtocolException ex) {
@@ -164,16 +166,20 @@ public class mechanic_list_details extends AppCompatActivity {
             Serialno.setText(serialno);
             Size.setText(size);
             Model.setText(model);
+            ClientProblem.setText(clientproblem);
             if (status != null && status.equals("0")) {
                 Status.setText("Pending");
                 receivebtn.setVisibility(View.VISIBLE);
 
             }
             if (status != null && status.equals("1")) {
-                Status.setText("Received");
+                Status.setText("Accepted");
                 completedbtn.setVisibility(View.VISIBLE);
             }
             if (status != null && status.equals("2")) {
+                Status.setText("Returned");
+            }
+            if (status != null && status.equals("3")) {
                 Status.setText("Delivered");
             }
 

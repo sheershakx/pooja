@@ -172,7 +172,6 @@
                 android:textSize="18sp" />
 
         </TableRow>
-
         <TableRow>
 
             <TextView
@@ -181,7 +180,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/simonetta"
-                android:text="Specification:"
+                android:text="Item specification:"
                 android:textColor="@color/Purple"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -198,6 +197,34 @@
                 android:textSize="18sp" />
 
         </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/simonetta"
+                android:text="Client problem:"
+                android:textColor="@color/Purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/clientproblem_mechanicdetail"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/simonetta"
+
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+
 
         <TableRow>
 
@@ -265,7 +292,7 @@
             android:layout_marginStart="80dp"
             android:background="#8080"
             android:fontFamily="@font/simonetta"
-            android:text="Receive"
+            android:text="Accept"
             android:textStyle="bold" />
 
         <Button

@@ -210,6 +210,58 @@
                             android:textSize="18sp" />
 
                     </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/simonetta"
+                            android:text="Item specification:"
+                            android:textColor="@color/Purple"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/spec_reportdetail"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/simonetta"
+
+                            android:textColor="#000"
+                            android:textSize="18sp" />
+
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/simonetta"
+                            android:text="Client problem:"
+                            android:textColor="@color/Purple"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/clientproblem_reportdetail"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/simonetta"
+
+                            android:textColor="#000"
+                            android:textSize="18sp" />
+
+                    </TableRow>
 
                     <TableRow>
 
@@ -219,7 +271,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginBottom="15dp"
                             android:fontFamily="@font/simonetta"
-                            android:text="Problem:"
+                            android:text="Problem solved:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -373,32 +425,7 @@
 
                     </TableRow>
 
-                    <TableRow>
 
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_column="0"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginBottom="15dp"
-                            android:fontFamily="@font/simonetta"
-                            android:text="Specification:"
-                            android:textColor="@color/Purple"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/spec_reportdetail"
-                            android:layout_height="wrap_content"
-                            android:layout_column="1"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/simonetta"
-
-                            android:textColor="#000"
-                            android:textSize="18sp" />
-
-                    </TableRow>
 
                     <TableRow android:layout_height="wrap_content">
 
@@ -455,6 +482,18 @@
                 </TableLayout>
 
 
+                <Button
+                    android:id="@+id/recv_mech_reportdetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="#C92121"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Receive"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
                 <Button
                     android:id="@+id/received_reportdetail"
                     android:layout_width="wrap_content"

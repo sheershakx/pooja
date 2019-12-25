@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".splash">
 
-</LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/gif"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/simonetta"
+        android:text="POOJA ELECTRONICS"
+        android:textAlignment="center"
+        android:textColor="@color/Purple"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gif"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/simonetta"
+        android:layout_marginHorizontal="10dp"
+        android:text="Deals with Wholesale electronic item"
+        android:textAlignment="center"
+        android:textColor="@color/Purple"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/diwalidiya" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/simonetta"
+        android:text="Powered by Acosaf Technology Pvt. Ltd"
+        android:textAlignment="center"
+        android:textColor="@color/Purple"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

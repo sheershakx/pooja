@@ -165,33 +165,54 @@
                             android:fontFamily="@font/simonetta"
                             android:hint="Model" />
                         <TextView
-                            android:id="@+id/v3"
+                            android:id="@+id/v111"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/model_clientpost"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="20dp"
                             android:fontFamily="@font/simonetta"
-                            android:text="Specification:"
+                            android:text="Item specification:"
+                            android:textColor="@color/Purple"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/specification_clientpost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/v111"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/simonetta"
+                            android:hint="Type item specification here" />
+                        <TextView
+                            android:id="@+id/v3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/specification_clientpost"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/simonetta"
+                            android:text="Problem:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/specification_clientpost"
+                            android:id="@+id/problem_clientpost"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/v3"
                             android:layout_marginHorizontal="10dp"
                             android:layout_marginTop="15dp"
                             android:fontFamily="@font/simonetta"
-                            android:hint="Type item specification here" />
+                            android:hint="Type your problem here" />
 
                         <RadioGroup
                             android:id="@+id/radiogroup_client"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/specification_clientpost"
+                            android:layout_below="@id/problem_clientpost"
                             android:layout_marginHorizontal="10dp"
                             android:layout_marginTop="20dp"
                             android:orientation="horizontal">

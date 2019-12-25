@@ -2,6 +2,7 @@ package com.sheershakx.poojaelectronics;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,23 +47,23 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
 
         final String Uid = uid.get(position);
         final String Status = status.get(position);
-        final String Itemtype = itemtype.get(position);
+
         final String Date = date.get(position);
 
 
         holder.uid.setText(Uid);
-        holder.itemtype.setText(Itemtype);
+
         holder.date.setText(Date);
 
         if (Status.equals("0")) {
+            holder.status.setTextColor(Color.parseColor("#ff0000"));
             holder.status.setText("Pending");
         }
         if (Status.equals("1")) {
-            holder.status.setText("Received");
+            holder.status.setTextColor(Color.parseColor("#00ff00"));
+            holder.status.setText("Accepted");
         }
-        if (Status.equals("2")) {
-            holder.status.setText("Delivered");
-        }
+
 
 
 
@@ -100,7 +101,7 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
             status = itemView.findViewById(R.id.status_mechanic);
             uid = itemView.findViewById(R.id.uid_mechanicstatus);
             date = itemView.findViewById(R.id.date_mechanicstatus);
-            itemtype = itemView.findViewById(R.id.itemtype_mechanicstatus);
+
 
 
         }

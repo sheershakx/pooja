@@ -42,7 +42,7 @@ public class client_post extends AppCompatActivity {
     Button post;
     TextView uid, date;
     Spinner itemtype;
-    EditText spec, serialno, sizeno, model;
+    EditText spec, serialno, sizeno, model,problem;
     RadioGroup radioGroup;
 
     String radiotext;
@@ -65,6 +65,7 @@ public class client_post extends AppCompatActivity {
 
         itemtype = findViewById(R.id.itemtype_clientpost);
         spec = findViewById(R.id.specification_clientpost);
+        problem = findViewById(R.id.problem_clientpost);
 
         serialno = findViewById(R.id.serialno_clientpost);
         sizeno = findViewById(R.id.size_clientpost);
@@ -107,12 +108,13 @@ public class client_post extends AppCompatActivity {
                 String Serialno = serialno.getText().toString().trim();
                 String Sizeno = sizeno.getText().toString().trim();
                 String Modelno = model.getText().toString().trim();
+                String Problem = problem.getText().toString().trim();
                 String specification = spec.getText().toString();
 
 
-                if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
+                if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(Problem) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
 
-                        new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype,Serialno,Sizeno,Modelno);
+                        new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype,Serialno,Sizeno,Modelno,Problem);
                         post.setEnabled(false);
                 } else
                     Toast.makeText(client_post.this, "Fields cannot be blank", Toast.LENGTH_SHORT).show();
@@ -143,6 +145,7 @@ public class client_post extends AppCompatActivity {
             String serialno = args[5];
             String size = args[6];
             String model = args[7];
+            String problem = args[8];
 
 
             try {
@@ -161,6 +164,7 @@ public class client_post extends AppCompatActivity {
                         URLEncoder.encode("serialno", "UTF-8") + "=" + URLEncoder.encode(serialno, "UTF-8") + "&" +
                         URLEncoder.encode("size", "UTF-8") + "=" + URLEncoder.encode(size, "UTF-8") + "&" +
                         URLEncoder.encode("model", "UTF-8") + "=" + URLEncoder.encode(model, "UTF-8") + "&" +
+                        URLEncoder.encode("clientProblem", "UTF-8") + "=" + URLEncoder.encode(problem, "UTF-8") + "&" +
                         URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
 
 

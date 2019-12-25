@@ -48,7 +48,7 @@ public class mechanic_deliver_action extends AppCompatActivity {
                 String Problem = problem.getText().toString();
                 String Cost = cost.getText().toString();
                 if (!TextUtils.isEmpty(Problem)) {
-                    if (!TextUtils.isEmpty(Cost)) {
+                    if (TextUtils.isEmpty(Cost)) {
                         new deliversolved().execute(Problem, "000");
                         deliver.setEnabled(false);
                     } else {

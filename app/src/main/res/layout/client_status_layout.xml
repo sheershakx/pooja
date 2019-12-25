@@ -23,70 +23,72 @@
                 android:fontFamily="@font/simonetta"
                 android:text="UID:"
                 android:textColor="@color/Purple"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/uid_clientstatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/v11"
                 android:layout_marginStart="5dp"
-                android:layout_toRightOf="@id/v11"
                 android:fontFamily="@font/simonetta"
                 android:text="15798U"
                 android:textColor="@color/Purple"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/date_clientstatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
+                android:layout_below="@id/v11"
+
+                android:layout_centerHorizontal="true"
+
                 android:fontFamily="@font/simonetta"
                 android:text="2019-11-26"
                 android:textColor="@color/Purple"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:layout_toLeftOf="@id/date_clientstatus"
+
                 android:fontFamily="@font/simonetta"
+               android:layout_centerHorizontal="true"
                 android:text="Date:"
                 android:textColor="@color/Purple"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/v12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/v11"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+android:layout_marginEnd="10dp"
                 android:fontFamily="@font/simonetta"
                 android:text="Status :-"
+                android:layout_alignParentEnd="true"
                 android:textColor="@color/Purple"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:textStyle="bold"
-                android:background="#88F0DC0B"
                 android:id="@+id/client_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/v11"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/v12"
+                android:layout_alignParentEnd="true"
+                android:background="#88F0DC0B"
                 android:fontFamily="@font/simonetta"
                 android:hint=""
-                android:textSize="22sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

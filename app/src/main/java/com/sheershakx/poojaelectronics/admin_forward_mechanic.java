@@ -1,5 +1,6 @@
 package com.sheershakx.poojaelectronics;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -253,6 +254,7 @@ public class admin_forward_mechanic extends AppCompatActivity {
 
         private void setspinnerdata() {
             Toast.makeText(admin_forward_mechanic.this, "Forwarded to mechanic", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),admin_pending_list.class));
             finish();
         }
     }

@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/simonetta"
-            android:text="All Orders"
+            android:text="Forward to mechanic"
             android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />
