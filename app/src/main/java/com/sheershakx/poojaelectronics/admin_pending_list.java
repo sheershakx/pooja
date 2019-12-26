@@ -1,5 +1,6 @@
 package com.sheershakx.poojaelectronics;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -27,7 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class admin_pending_list extends AppCompatActivity {
-
+ProgressDialog progressDialog;
     String clientid,uid,itemtype,date,name,status,astatus;
     ArrayList<String> ClientID=new ArrayList<String>();
     ArrayList<String> UID=new ArrayList<String>();
@@ -49,6 +50,7 @@ public class admin_pending_list extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog=ProgressDialog.show(admin_pending_list.this,"","Loading orders..",true);
             db_url = "http://peitahari.000webhostapp.com/admin_pending.php";
 
         }
@@ -140,6 +142,7 @@ public class admin_pending_list extends AppCompatActivity {
             RecyclerView recyclerView = findViewById(R.id.recycler_admin_pending);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             recyclerView.setAdapter(new adapterAdminPending(ClientID, UID, ItemType,Date,Name,Status,Astatus));
+            progressDialog.dismiss();
 
         }
     }

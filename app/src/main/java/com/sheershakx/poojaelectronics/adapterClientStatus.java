@@ -61,6 +61,9 @@ public class adapterClientStatus extends RecyclerView.Adapter<adapterClientStatu
         if (Status.equals("3")) {
             holder.status.setText("Received");
         }
+        if (Status.equals("4")) {
+            holder.status.setText("Rejected");
+        }
 
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {

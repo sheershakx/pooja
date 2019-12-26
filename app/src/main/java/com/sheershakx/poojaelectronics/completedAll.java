@@ -1,5 +1,6 @@
 package com.sheershakx.poojaelectronics;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -26,6 +27,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class completedAll extends AppCompatActivity {
+
+    ProgressDialog progressDialog;
     String clientid, uid, itemtype, date, name,status;
     ArrayList<String> ClientID = new ArrayList<String>();
     ArrayList<String> UID = new ArrayList<String>();
@@ -47,6 +50,7 @@ public class completedAll extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog=ProgressDialog.show(completedAll.this,"","Loading orders..",true);
             db_url = "http://peitahari.000webhostapp.com/completed.php";
 
         }
@@ -132,6 +136,7 @@ public class completedAll extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            progressDialog.dismiss();
             RecyclerView recyclerView = findViewById(R.id.recycler_completed);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name,Status));

@@ -10,10 +10,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class client_dashboard extends AppCompatActivity {
     Button post,viewstatus;
+    TextView nameview;
+
+    @Override
+    public void onBackPressed() {
+        new acceptDialog_admin().show(getSupportFragmentManager(),"quit?");
+        return;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,8 @@ public class client_dashboard extends AppCompatActivity {
 
         post=findViewById(R.id.post_client);
         viewstatus=findViewById(R.id.viewstatus_client);
+        nameview=findViewById(R.id.nameview_client);
+        nameview.setText(login.username);
 
         post.setOnClickListener(new View.OnClickListener() {
             @Override

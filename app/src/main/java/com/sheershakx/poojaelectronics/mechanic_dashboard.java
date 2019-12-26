@@ -41,7 +41,7 @@ import java.util.Locale;
 public class mechanic_dashboard extends AppCompatActivity {
     Button pending;
 
-    String uid, itemtype, date,status;
+    String uid, itemtype, date, status;
     ArrayList<String> UID = new ArrayList<String>();
     ArrayList<String> ITEMTYPE = new ArrayList<String>();
     ArrayList<String> DATE = new ArrayList<String>();
@@ -49,7 +49,14 @@ public class mechanic_dashboard extends AppCompatActivity {
 
     TextView mechanicnameview;
 
-    TextView currdateshow,pendingq,received,delivered;
+    TextView currdateshow, pendingq, received, delivered;
+    String pend, rec, del;
+
+    @Override
+    public void onBackPressed() {
+        new acceptDialog_admin().show(getSupportFragmentManager(),"quit?");
+        return;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +64,16 @@ public class mechanic_dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_mechanic_dashboard);
 
 
-
         Toolbar toolbar = findViewById(R.id.mechanic_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //typecasting
-        mechanicnameview=findViewById(R.id.mechanic_name_view);
+        mechanicnameview = findViewById(R.id.mechanic_name_view);
 
-        currdateshow=findViewById(R.id.todaydate_mechanicdash);
-        pendingq=findViewById(R.id.pending_mechanicdash);
-        received=findViewById(R.id.received_mechanicdash);
-        delivered=findViewById(R.id.delivered_mechanicdash);
+        currdateshow = findViewById(R.id.todaydate_mechanicdash);
+        pendingq = findViewById(R.id.pending_mechanicdash);
+        received = findViewById(R.id.received_mechanicdash);
+        delivered = findViewById(R.id.delivered_mechanicdash);
 
         mechanicnameview.setText(login.username);
 
@@ -91,8 +97,7 @@ public class mechanic_dashboard extends AppCompatActivity {
         }
         currdateshow.setText(date);
 
-
-
+        new getcount().execute();
         new mechanicdashboard().execute();
     }
 
@@ -121,7 +126,6 @@ public class mechanic_dashboard extends AppCompatActivity {
     public class mechanicdashboard extends AsyncTask<String, String, String> {
         String db_url;
 
-        
 
         @Override
         protected void onPreExecute() {
@@ -212,7 +216,114 @@ public class mechanic_dashboard extends AppCompatActivity {
             //  progressDialog.dismiss();
             RecyclerView recyclerView = findViewById(R.id.recycler_mechanic_delivered);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterMechanicDelivered(UID, ITEMTYPE, DATE,STATUS));
+            recyclerView.setAdapter(new adapterMechanicDelivered(UID, ITEMTYPE, DATE, STATUS));
+
+        }
+    }
+
+    public class getcount extends AsyncTask<String, String, String> {
+        String db_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            // progressDialog= ProgressDialog.show(getApplicationContext(), "", "Loading your orders..", true);
+            db_url = "http://peitahari.000webhostapp.com/qqq.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
+
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                StringBuffer buffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                String data = stringBuilder.toString().trim();
+
+                String json;
+
+                InputStream stream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
+                int size = stream.available();
+                byte[] buffer1 = new byte[size];
+                stream.read(buffer1);
+                stream.close();
+
+                json = new String(buffer1, "UTF-8");
+                JSONArray jsonArray = new JSONArray(json);
+
+                for (int i = 0; i <= jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    if (jsonObject.getString("status") != null && jsonObject.getString("status").equals("0")) {
+
+                        pend = jsonObject.getString("COUNT(*)");
+
+
+                    }
+                    if (jsonObject.getString("status") != null && jsonObject.getString("status").equals("1")) {
+
+                        rec = jsonObject.getString("COUNT(*)");
+
+
+                    }
+                    if (jsonObject.getString("status") != null &&jsonObject.getString("status").equals("2") || jsonObject.getString("status").equals("3")) {
+
+                        del = jsonObject.getString("COUNT(*)");
+
+
+                    }
+                }
+
+
+                return null;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+//
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (pend != null) {
+                pendingq.setText(pend);
+            }
+            if (rec != null) {
+                received.setText(rec);
+            }
+            if (del != null) {
+                delivered.setText(del);
+            }
 
         }
     }

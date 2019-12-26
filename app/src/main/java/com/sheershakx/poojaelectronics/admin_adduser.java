@@ -137,6 +137,9 @@ public class admin_adduser extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(admin_adduser.this, "User Created", Toast.LENGTH_SHORT).show();
+            name.setText("");
+            address.setText("");
+            mobile.setText("");
         }
     }
 }

@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class client_status_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, status, serialno, size, model, clientproblem, problemfix,expense;
+    String date, itemtype, spec, cost, status, serialno, size, model, clientproblem, problemfix,expense,remark;
     String uid;
 
     TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model, ClientProblem, Problemfix,Expense;
@@ -82,7 +82,7 @@ public class client_status_detail extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(client_status_detail.this, "", "Loading orders..", true);
+            progressDialog = ProgressDialog.show(client_status_detail.this, "", "Loading details..", true);
 
             db_url = "http://peitahari.000webhostapp.com/client_status_detail.php";
 
@@ -134,6 +134,7 @@ public class client_status_detail extends AppCompatActivity {
                 clientproblem = jsonObject.getString("clientproblem");
                 problemfix = jsonObject.getString("problem");
                 expense = jsonObject.getString("expense");
+                remark=jsonObject.getString("remark");
 
 
             } catch (ProtocolException ex) {
@@ -176,6 +177,10 @@ public class client_status_detail extends AppCompatActivity {
             }
             if (status != null && status.equals("3")) {
                 Status.setText("Received");
+
+            }
+            if (status != null && status.equals("4")) {
+                Status.setText("Rejected for reason: ("+remark+")");
 
             }
 

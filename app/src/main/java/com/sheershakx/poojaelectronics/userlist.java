@@ -1,12 +1,13 @@
 package com.sheershakx.poojaelectronics;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,33 +24,35 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class client_status extends AppCompatActivity {
+public class userlist extends AppCompatActivity {
     ProgressDialog progressDialog;
 
-    String uid,date,status;
-    ArrayList<String> UID = new ArrayList<String>();
-    ArrayList<String> DATE = new ArrayList<String>();
-    ArrayList<String> STATUS = new ArrayList<String>();
+    String name, mobile, type, activestatus,id;
+
+    ArrayList<String> Name = new ArrayList<String>();
+    ArrayList<String> Mobile = new ArrayList<String>();
+    ArrayList<String> Type = new ArrayList<String>();
+    ArrayList<String> ActiveStatus = new ArrayList<String>();
+    ArrayList<String> ID = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_status);
-        new clientstatus().execute();
+        setContentView(R.layout.activity_userlist);
+        new userlistdetail().execute();
     }
 
-    public class clientstatus extends AsyncTask<String, String, String> {
+    public class userlistdetail extends AsyncTask<String, String, String> {
         String db_url;
 
 
         @Override
         protected void onPreExecute() {
-            progressDialog= ProgressDialog.show(client_status.this, "", "Loading your orders..", true);
-            db_url = "http://peitahari.000webhostapp.com/client_status.php";
+            progressDialog = ProgressDialog.show(userlist.this, "", "Loading orders..", true);
+            db_url = "http://peitahari.000webhostapp.com/userlist.php";
 
         }
 
@@ -64,9 +67,6 @@ public class client_status extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
-
-                bufferedWriter.write(data_string);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
@@ -100,16 +100,21 @@ public class client_status extends AppCompatActivity {
                 for (int i = 0; i <= jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("id") != null) {
-                        uid = jsonObject.getString("uid");
-                        status = jsonObject.getString("status");
-                        date = jsonObject.getString("sentdate");
+                        name = jsonObject.getString("name");
+                        id = jsonObject.getString("id");
+                        mobile = jsonObject.getString("mobile");
+                        type = jsonObject.getString("type");
+                        activestatus = jsonObject.getString("userstatus");
 
 
-                        //array list
+                        Name.add(name);
+                        Mobile.add(mobile);
+                        Type.add(type);
+                        ActiveStatus.add(activestatus);
+                        ID.add(id);
 
-                        UID.add(uid);
-                        STATUS.add(status);
-                        DATE.add(date);
+
+
                     }
                 }
 
@@ -124,16 +129,16 @@ public class client_status extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//
+
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            RecyclerView recyclerView =findViewById(R.id.recycler_client_status);
+            RecyclerView recyclerView = findViewById(R.id.recyclerview_userlist);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterClientStatus(UID,STATUS,DATE));
+            recyclerView.setAdapter(new adapterUserlist(Name, Mobile, Type, ActiveStatus,ID));
+            progressDialog.dismiss();
 
         }
     }

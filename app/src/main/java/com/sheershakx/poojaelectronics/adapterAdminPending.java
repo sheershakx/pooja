@@ -77,6 +77,10 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
             holder.status.setTextColor(Color.parseColor("#00ff00"));
             holder.status.setText("Received");
         }
+        else if (Status!=null && Status.equals("4")){
+            holder.status.setTextColor(Color.parseColor("#ff0000"));
+            holder.status.setText("Rejected");
+        }
 
         if (Status!=null && Astatus!=null &&  Status.equals("1") && Astatus.equals("0") ||  Astatus.equals("1") ||  Astatus.equals("2")) {
             holder.status.setTextColor(Color.parseColor("#ff0000"));

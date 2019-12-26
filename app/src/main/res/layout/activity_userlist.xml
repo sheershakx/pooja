@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".mechanicDelivered">
+    tools:context=".userlist">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,29 +18,23 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/simonetta"
-            android:text="Delivered by mechanic"
+            android:text="All users list"
             android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />
 
-
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9.2">
-        <Spinner
-            android:id="@+id/spinner_mechdelv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/spinner_mechdelv"
-            android:id="@+id/recycler_mdelivered"/>
+        android:layout_weight="9.2"
+        android:orientation="vertical">
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerview_userlist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

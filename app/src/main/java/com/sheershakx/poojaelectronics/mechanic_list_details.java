@@ -92,7 +92,7 @@ public class mechanic_list_details extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(mechanic_list_details.this, "", "Loading orders..", true);
+            progressDialog = ProgressDialog.show(mechanic_list_details.this, "", "Loading details..", true);
 
             db_url = "http://peitahari.000webhostapp.com/mechanic_pending_details.php";
 
@@ -255,6 +255,8 @@ public class mechanic_list_details extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(mechanic_list_details.this, "Status Changed", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),mechanic_pending_list.class));
+            finish();
 
         }
     }

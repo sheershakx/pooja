@@ -21,11 +21,12 @@
             app:menu="@menu/menu" />
 
         <TextView
+            android:id="@+id/nameview_client"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/simonetta"
-            android:text="Client Dashboard"
+
             android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold" />

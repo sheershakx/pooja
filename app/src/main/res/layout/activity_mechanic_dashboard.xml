@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".mechanic_dashboard">
@@ -11,13 +11,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/Purple"
-        android:layout_weight="0.8">
+        android:layout_weight="0.8"
+        android:background="@color/Purple">
+
         <androidx.appcompat.widget.Toolbar
-            app:menu="@menu/menu"
             android:id="@+id/mechanic_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:menu="@menu/menu" />
 
         <TextView
             android:id="@+id/mechanic_name_view"
@@ -94,7 +95,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/simonetta"
-
+                    android:hint="0"
                     android:textColor="#000"
                     android:textSize="18sp" />
 
@@ -121,7 +122,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/simonetta"
-
+                    android:hint="0"
                     android:textColor="#000"
                     android:textSize="18sp" />
             </TableRow>
@@ -147,7 +148,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/simonetta"
-
+                    android:hint="0"
                     android:textColor="#000"
                     android:textSize="18sp" />
 

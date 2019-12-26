@@ -296,6 +296,16 @@
             android:text="Accept"
             android:textStyle="bold" />
         <Button
+            android:layout_marginStart="20dp"
+            android:id="@+id/rejectbtn_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#D0E72727"
+            android:fontFamily="@font/simonetta"
+            android:text="Reject"
+            android:textStyle="bold" />
+        <Button
             android:layout_marginStart="80dp"
             android:layout_marginEnd="10dp"
             android:id="@+id/completedbtn_admin"
@@ -308,5 +318,14 @@
             android:textStyle="bold" />
 
 
+
     </LinearLayout>
+    <EditText
+        android:id="@+id/reject_reason"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+
+        android:layout_height="wrap_content"
+        android:hint="Reason for rejection"/>
 </LinearLayout>

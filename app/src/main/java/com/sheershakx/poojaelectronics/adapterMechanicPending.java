@@ -73,6 +73,7 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
                 Intent intent = new Intent(context, mechanic_list_details.class);
                 intent.putExtra("uid", Uid);
                 context.startActivity(intent);
+                ((mechanic_pending_list)context).finish();
 
 
             }

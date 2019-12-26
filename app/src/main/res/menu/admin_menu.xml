@@ -15,6 +15,11 @@
         android:id="@+id/menu_additem"
         app:showAsAction="never"
         android:title="Add Itemgroup"/>
+
+    <item
+        android:id="@+id/menu_userlist"
+        app:showAsAction="never"
+        android:title="View Users"/>
     <item
 
         android:id="@+id/menu_aboutus"
