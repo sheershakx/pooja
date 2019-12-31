@@ -34,7 +34,7 @@ import java.util.Locale;
 public class admin_pending_details extends AppCompatActivity {
     String uid, clientid;
     ProgressDialog progressDialog;
-    String date, itemtype, status, astatus, cost, spec, serialno, size, model, clientproblem,remark;
+    String date, itemtype, status, astatus,mstatus, cost, spec, serialno, size, model, clientproblem,remark;
     Button forwardbtn, acceptbtn, rejectbtn;
     EditText reason;
     TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model, ClientProblem;
@@ -116,6 +116,7 @@ public class admin_pending_details extends AppCompatActivity {
             clientid = intent.getStringExtra("clientid");
             status = intent.getStringExtra("status");
             astatus = intent.getStringExtra("astatus");
+            mstatus = intent.getStringExtra("mstatus");
             new adminpendingdetails().execute();
         }
     }
@@ -221,7 +222,10 @@ public class admin_pending_details extends AppCompatActivity {
                 Status.setText("Returned(by mechanic)");
             }
             if (status != null && status.equals("4")) {
-                Status.setText("Rejected for reason: ("+remark+")");
+                Status.setText("Rejected by admin for reason: ("+remark+")");
+            }
+            if (mstatus != null && mstatus.equals("4")) {
+                Status.setText("Rejected by mechanic reason: ("+remark+")");
             }
 
 
@@ -294,7 +298,8 @@ public class admin_pending_details extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-          finish();
+            finish();
+
 
 
         }

@@ -22,7 +22,7 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
     private ArrayList<String> date;
 
 
-    public adapterMechanicPending(ArrayList<String> uid, ArrayList<String> status,ArrayList<String> itemtype, ArrayList<String> date) {
+    public adapterMechanicPending(ArrayList<String> uid, ArrayList<String> status, ArrayList<String> itemtype, ArrayList<String> date) {
         this.uid = uid;
         this.status = status;
         this.itemtype = itemtype;
@@ -63,8 +63,10 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
             holder.status.setTextColor(Color.parseColor("#00ff00"));
             holder.status.setText("Accepted");
         }
-
-
+        if (Status.equals("4")) {
+            holder.status.setTextColor(Color.parseColor("#ff0000"));
+            holder.status.setText("Rejeted");
+        }
 
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +75,7 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
                 Intent intent = new Intent(context, mechanic_list_details.class);
                 intent.putExtra("uid", Uid);
                 context.startActivity(intent);
-                ((mechanic_pending_list)context).finish();
+                ((mechanic_pending_list) context).finish();
 
 
             }
@@ -102,7 +104,6 @@ public class adapterMechanicPending extends RecyclerView.Adapter<adapterMechanic
             status = itemView.findViewById(R.id.status_mechanic);
             uid = itemView.findViewById(R.id.uid_mechanicstatus);
             date = itemView.findViewById(R.id.date_mechanicstatus);
-
 
 
         }

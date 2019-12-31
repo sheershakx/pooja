@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +34,9 @@ import java.util.Locale;
 public class mechanic_list_details extends AppCompatActivity {
     String uid;
     ProgressDialog progressDialog;
-    String date, itemtype, status, cost, spec, serialno, size, model, clientproblem;
-    Button receivebtn, completedbtn;
+    String date, itemtype, status, cost, spec, serialno, size, model, clientproblem, remark;
+    Button receivebtn, completedbtn, rejectbtn;
+    EditText rejectreason;
     TextView Date, Uid, Itemtype, Status, Cost, Spec, Serialno, Size, Model, ClientProblem;
 
     @Override
@@ -51,14 +54,35 @@ public class mechanic_list_details extends AppCompatActivity {
         Serialno = findViewById(R.id.serialno_mechanicdetail);
         Size = findViewById(R.id.size_mechanicdetail);
         Model = findViewById(R.id.model_mechanicdetail);
+        rejectreason = findViewById(R.id.reject_reason_mech);
+
 
         receivebtn = findViewById(R.id.receivebtn_mechanic);
         completedbtn = findViewById(R.id.completedbtn_mechanic);
+        rejectbtn = findViewById(R.id.rejectbtn_mechanic);
         ClientProblem = findViewById(R.id.clientproblem_mechanicdetail);
 
         receivebtn.setVisibility(View.GONE);
+        rejectreason.setVisibility(View.GONE);
+        rejectbtn.setVisibility(View.GONE);
         completedbtn.setVisibility(View.GONE);
         getincomingintent();
+
+        rejectbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rejectreason.setVisibility(View.VISIBLE);
+                receivebtn.setVisibility(View.GONE);
+                completedbtn.setVisibility(View.GONE);
+                rejectbtn.setText("Enter the reason and submit here");
+
+                String Rejectreason = rejectreason.getText().toString();
+                if (rejectreason != null && !TextUtils.isEmpty(Rejectreason)) {
+                   new updatestatusrejectmech().execute(Rejectreason);
+                } else
+                    Toast.makeText(getApplicationContext(), "Reason for rejection is compulsory", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         receivebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +166,7 @@ public class mechanic_list_details extends AppCompatActivity {
                 size = jsonObject.getString("size");
                 model = jsonObject.getString("model");
                 clientproblem = jsonObject.getString("clientproblem");
+                remark = jsonObject.getString("remark");
 
 
             } catch (ProtocolException ex) {
@@ -170,6 +195,7 @@ public class mechanic_list_details extends AppCompatActivity {
             if (status != null && status.equals("0")) {
                 Status.setText("Pending");
                 receivebtn.setVisibility(View.VISIBLE);
+                rejectbtn.setVisibility(View.VISIBLE);
 
             }
             if (status != null && status.equals("1")) {
@@ -181,6 +207,9 @@ public class mechanic_list_details extends AppCompatActivity {
             }
             if (status != null && status.equals("3")) {
                 Status.setText("Delivered");
+            }
+            if (status != null && status.equals("4")) {
+                Status.setText("Rejected for reason :" + remark);
             }
 
 
@@ -255,9 +284,72 @@ public class mechanic_list_details extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(mechanic_list_details.this, "Status Changed", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(),mechanic_pending_list.class));
+            startActivity(new Intent(getApplicationContext(), mechanic_pending_list.class));
             finish();
 
         }
     }
+
+    public class updatestatusrejectmech extends AsyncTask<String, String, String> {
+        String db_url;
+
+
+        @Override
+        protected void onPreExecute() {
+            db_url = "http://peitahari.000webhostapp.com/updatestatusrejectmechanic.php";
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            String reason;
+            reason = args[0];
+            try {
+                URL url = new URL(db_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
+                        URLEncoder.encode("reason", "UTF-8") + "=" + URLEncoder.encode(reason, "UTF-8");
+
+                bufferedWriter.write(data_string);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                StringBuffer buffer = new StringBuffer();
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+
+            } catch (ProtocolException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            finish();
+
+
+        }
+    }
+
 }

@@ -34,6 +34,7 @@ import java.util.ArrayList;
 public class mechanicDelivered extends AppCompatActivity {
     ProgressDialog progressDialog;
     Spinner mechdelv;
+    String mstatus=null;
     String clientid, uid, itemtype, date, name, status;
     ArrayList<String> ClientID = new ArrayList<String>();
     ArrayList<String> UID = new ArrayList<String>();
@@ -41,6 +42,7 @@ public class mechanicDelivered extends AppCompatActivity {
     ArrayList<String> ItemType = new ArrayList<String>();
     ArrayList<String> Name = new ArrayList<String>();
     ArrayList<String> Status = new ArrayList<String>();
+    ArrayList<String> MStatus = new ArrayList<String>();
 
     String id, mechanicname;
     ArrayList<String> ID = new ArrayList<String>();
@@ -141,7 +143,7 @@ public class mechanicDelivered extends AppCompatActivity {
                         date = jsonObject.getString("date");
                         name = jsonObject.getString("name");
                         status = jsonObject.getString("adminstatus");
-
+mstatus="a";
 
                         //array list
 
@@ -151,6 +153,7 @@ public class mechanicDelivered extends AppCompatActivity {
                         Date.add(date);
                         Name.add(name);
                         Status.add(status);
+                        MStatus.add(mstatus);
 
                     }
                 }
@@ -175,7 +178,7 @@ public class mechanicDelivered extends AppCompatActivity {
             progressDialog.dismiss();
             RecyclerView recyclerView = findViewById(R.id.recycler_mdelivered);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name, Status));
+            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name, Status,MStatus));
 
         }
     }

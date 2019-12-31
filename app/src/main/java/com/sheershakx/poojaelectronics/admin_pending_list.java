@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class admin_pending_list extends AppCompatActivity {
 ProgressDialog progressDialog;
-    String clientid,uid,itemtype,date,name,status,astatus;
+    String clientid,uid,itemtype,date,name,status,astatus,mstatus;
     ArrayList<String> ClientID=new ArrayList<String>();
     ArrayList<String> UID=new ArrayList<String>();
     ArrayList<String> Date=new ArrayList<String>();
@@ -37,6 +37,7 @@ ProgressDialog progressDialog;
     ArrayList<String> Name=new ArrayList<String>();
     ArrayList<String> Status=new ArrayList<String>();
     ArrayList<String> Astatus=new ArrayList<String>();
+    ArrayList<String> Mstatus=new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +107,7 @@ ProgressDialog progressDialog;
                         name = jsonObject.getString("name");
                         status = jsonObject.getString("userstatus");
                         astatus = jsonObject.getString("adminstatus");
+                        mstatus = jsonObject.getString("mechanicstatus");
 
 
 
@@ -118,6 +120,7 @@ ProgressDialog progressDialog;
                         Name.add(name);
                         Status.add(status);
                         Astatus.add(astatus);
+                        Mstatus.add(mstatus);
 
                     }
                 }
@@ -141,7 +144,7 @@ ProgressDialog progressDialog;
         protected void onPostExecute(String s) {
             RecyclerView recyclerView = findViewById(R.id.recycler_admin_pending);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterAdminPending(ClientID, UID, ItemType,Date,Name,Status,Astatus));
+            recyclerView.setAdapter(new adapterAdminPending(ClientID, UID, ItemType,Date,Name,Status,Astatus,Mstatus));
             progressDialog.dismiss();
 
         }

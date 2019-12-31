@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class admin_report_detail extends AppCompatActivity {
     ProgressDialog progressDialog;
-    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model, m_approve, m_deliver, c_deliver, c_received, problem, mech_cost, Clientproblem;
+    String date, itemtype, spec, cost, mechanicstatus, adminstatus, serialno, size, model, m_approve, m_deliver, c_deliver, c_received, problem, mech_cost, Clientproblem,remark;
     String uid;
 
     TextView Uid, Itemtype, Date, Spec, Cost, Status, Serialno, Size, Model, problemsolved, mechcost, madate, mddate, cddate, crdate, clientproblem;
@@ -157,6 +157,7 @@ public class admin_report_detail extends AppCompatActivity {
                 m_deliver = jsonObject.getString("m_deliverdate");
                 c_deliver = jsonObject.getString("c_deliverdate");
                 c_received = jsonObject.getString("c_receiveddate");
+                remark = jsonObject.getString("remark");
 
 
             } catch (ProtocolException ex) {
@@ -213,7 +214,10 @@ public class admin_report_detail extends AppCompatActivity {
                 Status.setText("Received(from mechanic)");
                 receivedBtn.setVisibility(View.VISIBLE);
             }
-
+            if (mechanicstatus != null && adminstatus != null&& adminstatus.equals("2") && mechanicstatus.equals("4")) {
+                Status.setText("Rejected(from mechanic) due to :"+remark);
+               recv_mech.setVisibility(View.VISIBLE);
+            }
 
         }
     }

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class completedAll extends AppCompatActivity {
 
     ProgressDialog progressDialog;
+    String mstatus=null;
     String clientid, uid, itemtype, date, name,status;
     ArrayList<String> ClientID = new ArrayList<String>();
     ArrayList<String> UID = new ArrayList<String>();
@@ -36,6 +37,7 @@ public class completedAll extends AppCompatActivity {
     ArrayList<String> ItemType = new ArrayList<String>();
     ArrayList<String> Name = new ArrayList<String>();
     ArrayList<String> Status = new ArrayList<String>();
+    ArrayList<String> MStatus = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,7 @@ public class completedAll extends AppCompatActivity {
                         date = jsonObject.getString("date");
                         name = jsonObject.getString("name");
                         status = jsonObject.getString("adminstatus");
+                        mstatus="a";
 
 
                         //array list
@@ -115,6 +118,7 @@ public class completedAll extends AppCompatActivity {
                         Date.add(date);
                         Name.add(name);
                         Status.add(status);
+                        MStatus.add(mstatus);
 
                     }
                 }
@@ -139,7 +143,7 @@ public class completedAll extends AppCompatActivity {
             progressDialog.dismiss();
             RecyclerView recyclerView = findViewById(R.id.recycler_completed);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name,Status));
+            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name,Status,MStatus));
 
         }
     }

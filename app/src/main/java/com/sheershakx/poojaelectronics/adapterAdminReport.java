@@ -22,15 +22,17 @@ public class adapterAdminReport extends RecyclerView.Adapter<adapterAdminReport.
     private ArrayList<String> date;
     private ArrayList<String> name;
     private ArrayList<String> status;
+    private ArrayList<String> mstatus;
 
 
-    public adapterAdminReport(ArrayList<String> clientiid, ArrayList<String> uid, ArrayList<String> itemtype, ArrayList<String> date, ArrayList<String> name, ArrayList<String> status) {
+    public adapterAdminReport(ArrayList<String> clientiid, ArrayList<String> uid, ArrayList<String> itemtype, ArrayList<String> date, ArrayList<String> name, ArrayList<String> status,ArrayList<String> mstatus) {
         this.clientid = clientiid;
         this.uid = uid;
         this.itemtype = itemtype;
         this.date = date;
         this.name = name;
         this.status = status;
+        this.mstatus = mstatus;
     }
 
     @NonNull
@@ -53,6 +55,7 @@ public class adapterAdminReport extends RecyclerView.Adapter<adapterAdminReport.
         final String Date = date.get(position);
         final String Name = name.get(position);
         final String Status = status.get(position);
+        final String Mstatus = mstatus.get(position);
 
 
         holder.name.setText(Name);
@@ -76,6 +79,9 @@ public class adapterAdminReport extends RecyclerView.Adapter<adapterAdminReport.
         }
         else if (Status != null && Status.equals("5")) {
             holder.status.setText("Due to deliver");
+        } if (Status != null && Mstatus != null && Status.equals("2") && Mstatus.equals("4")) {
+            holder.status.setTextColor(Color.parseColor("#ff0000"));
+            holder.status.setText("Mechanic\nRejected");
         }
 
 
