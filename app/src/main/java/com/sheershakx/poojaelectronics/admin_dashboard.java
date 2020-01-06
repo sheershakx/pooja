@@ -1,6 +1,9 @@
 package com.sheershakx.poojaelectronics;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,8 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class admin_dashboard extends AppCompatActivity {
     Button createmechanic, createclient;
@@ -27,7 +35,7 @@ public class admin_dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
-
+        firebasenotificationregister();
         //typecasting
         createmechanic = findViewById(R.id.createmechanic_admin);
         createclient = findViewById(R.id.createclient_admin);
@@ -87,6 +95,24 @@ public class admin_dashboard extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), completedAll.class));
             }
         });
+    }
+
+    public void firebasenotificationregister() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel =
+                    new NotificationChannel("mynotifications", "mynotifications", NotificationManager.IMPORTANCE_HIGH);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        FirebaseMessaging.getInstance().subscribeToTopic("admin")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+
     }
 
     @Override

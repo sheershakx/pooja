@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "190176861417",
+    "firebase_url": "https://pooja-electronics-63adb.firebaseio.com",
+    "project_id": "pooja-electronics-63adb",
+    "storage_bucket": "pooja-electronics-63adb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190176861417:android:2a0425f72502691b2fe478",
+        "android_client_info": {
+          "package_name": "com.sheershakx.poojaelectronics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190176861417-3h1v0ro5eb2at3ufio3sr842fgj0ksbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sheershakx.poojaelectronics",
+            "certificate_hash": "c92c6b25753ec7a965dfdcfdfc4e42d90680a654"
+          }
+        },
+        {
+          "client_id": "190176861417-d2oumielq8vl7rdnvjt46vnhf46mtdhb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3w5tVHNZgIJcjxYWuRPc2nO-6TVX6SUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190176861417-d2oumielq8vl7rdnvjt46vnhf46mtdhb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

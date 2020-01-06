@@ -1,16 +1,21 @@
 package com.sheershakx.poojaelectronics;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,15 +36,20 @@ public class login extends AppCompatActivity {
     EditText mobile, password;
 
     Button loginbtn;
-
+    public static final String CHANNEL_1_ID = "channel1";
     public static String usertype;
     public static String userid;
     public static String username;
+    public static String notify;
+
+    NotificationManagerCompat notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+      //  createNotificationChannels();
+        notificationManager = NotificationManagerCompat.from(this);
         //type casting
         mobile = findViewById(R.id.mobile);
         password = findViewById(R.id.password);
@@ -50,6 +60,7 @@ public class login extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               // sendOnChannel1();
                 String Mobile = mobile.getText().toString();
                 String Password = password.getText().toString();
 
@@ -60,6 +71,35 @@ public class login extends AppCompatActivity {
                     Toast.makeText(login.this, "Fields can't be empty", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(CHANNEL_1_ID, "Channel 1", NotificationManager.IMPORTANCE_HIGH);
+            channel1.setDescription("This is channel 1");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+
+        }
+
+
+    }
+
+
+    public void sendOnChannel1() {
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+               .setSmallIcon(R.drawable.poojaicon)
+                .setContentTitle("New Notification")
+                .setContentText("This is a new notifiation message")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setDefaults(Notification.DEFAULT_SOUND).setAutoCancel(true)
+                .build();
+
+        notificationManager.notify(1, notification);
+
 
     }
 
@@ -114,6 +154,9 @@ public class login extends AppCompatActivity {
                 usertype = jsonObject.getString("usertype");
                 userid = jsonObject.getString("userid");
                 username = jsonObject.getString("username");
+                if (jsonObject.getString("notify") != null) {
+                    notify = jsonObject.getString("notify");
+                }
 //
                 return data;
 
@@ -149,8 +192,7 @@ public class login extends AppCompatActivity {
 
                     startActivity(new Intent(getApplicationContext(), client_dashboard.class));
                     finish();
-                }
-                else Toast.makeText(login.this, "User TYpe not found", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(login.this, "User TYpe not found", Toast.LENGTH_SHORT).show();
 
 
             } else
