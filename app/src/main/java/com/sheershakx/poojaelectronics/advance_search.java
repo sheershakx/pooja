@@ -1,17 +1,17 @@
 package com.sheershakx.poojaelectronics;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,75 +32,81 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class admin_forward_mechanic extends AppCompatActivity {
-    String id, mechanicname;
-    ArrayList<String> ID = new ArrayList<String>();
-    ArrayList<String> Mechanicname = new ArrayList<String>();
-    Spinner mechanicspinner;
-    TextView selectedmechanic;
-    Button continuebtn;
+public class advance_search extends AppCompatActivity {
+    String cid,uid,Date,itemType;
+    ArrayList<String> CID=new ArrayList<String>();
+    ArrayList<String> UID=new ArrayList<String>();
+    ArrayList<String> DATE=new ArrayList<String>();
+    ArrayList<String> ITEMTYPE=new ArrayList<String>();
+    ProgressDialog progressDialog;
 
-    Integer mechanic_id;
-    //strings for incoming intents
-    String uid, itemtype, date;
+    String id, clientname;
+    ArrayList<String> ID = new ArrayList<String>();
+    ArrayList<String> ClientName = new ArrayList<String>();
+
+    Spinner searchtype, searchclient;
+    Button searchbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_forward_mechanic);
+        setContentView(R.layout.activity_advance_search);
+        //typecasting
 
-        getIncomingIntent();
+        searchtype = findViewById(R.id.search_type);
+        searchclient = findViewById(R.id.search_client);
+        searchbtn = findViewById(R.id.search_searchbtn);
 
-        mechanicspinner = findViewById(R.id.mechanic_name_spinner);
-        selectedmechanic = findViewById(R.id.selected_mechanic_name);
-        continuebtn = findViewById(R.id.continuebtn_forward);
+        new getclientname().execute();
 
-        new getmechanicname().execute();
 
-        mechanicspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedmechanic.setText(mechanicspinner.getSelectedItem().toString());
-                mechanic_id =Integer.parseInt(ID.get(position));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        continuebtn.setOnClickListener(new View.OnClickListener() {
+        String typearray[] = {"Accepted", "Rejected", "Forwarded to mechanic", "Returned"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(advance_search.this, android.R.layout.simple_spinner_item, typearray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        searchtype.setAdapter(adapter);
+        searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new forwardtomechanic().execute();
-                continuebtn.setEnabled(false);
+                CID.clear();
+                UID.clear();
+                ITEMTYPE.clear();
+                DATE.clear();
 
+                String typeid=null;
+                String type = searchtype.getSelectedItem().toString();
+                Integer position = searchclient.getSelectedItemPosition();
+                Integer idtosend = Integer.parseInt(ID.get(position));
+                if (type != null && type.equals("Accepted")) {
+                    typeid="1"; //in api check for userstatus=1
+                }
+                if (type != null && type.equals("Rejected")) {
+                    typeid="4"; //check userstatus=4
+                }
+                if (type != null && type.equals("Forwarded to mechanic")) {
+                    typeid="0";
+                }
+                if (type != null && type.equals("Returned")) {
+                    typeid="3"; //userstatus=3(received by client)
+                }
+                new advancedSearch().execute(typeid,Integer.toString(idtosend));
             }
         });
-
-
     }
 
-    private void getIncomingIntent() {
-        uid = getIntent().getStringExtra("uid");
-        itemtype = getIntent().getStringExtra("itemtype");
-        date = getIntent().getStringExtra("date");
-    }
-
-    public class getmechanicname extends AsyncTask<String, String, String> {
+    public class getclientname extends AsyncTask<String, String, String> {
         String db_url;
 
 
         @Override
         protected void onPreExecute() {
-            // progressDialog= ProgressDialog.show(getApplicationContext(), "", "Loading your orders..", true);
-            db_url = "http://peitahari.000webhostapp.com/getmechanicname.php";
+            progressDialog = ProgressDialog.show(advance_search.this, "", "Loading your orders..", true);
+            db_url = "http://peitahari.000webhostapp.com/getclientname.php";
 
         }
 
         @Override
         protected String doInBackground(String... args) {
+
 
             try {
                 URL url = new URL(db_url);
@@ -110,7 +116,7 @@ public class admin_forward_mechanic extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-//                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
+//                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(idd, "UTF-8");
 //
 //                bufferedWriter.write(data_string);
                 bufferedWriter.flush();
@@ -147,13 +153,13 @@ public class admin_forward_mechanic extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("id") != null) {
                         id = jsonObject.getString("id");
-                        mechanicname = jsonObject.getString("name");
+                        clientname = jsonObject.getString("name");
 
 
                         //array list
 
                         ID.add(id);
-                        Mechanicname.add(mechanicname);
+                        ClientName.add(clientname);
 
                     }
                 }
@@ -181,28 +187,31 @@ public class admin_forward_mechanic extends AppCompatActivity {
         }
 
         private void setspinnerdata() {
-            String[] mStringArray = new String[Mechanicname.size()];
-            mStringArray = Mechanicname.toArray(mStringArray);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(admin_forward_mechanic.this, android.R.layout.simple_spinner_item, mStringArray);
+            progressDialog.dismiss();
+            String[] mStringArray = new String[ClientName.size()];
+            mStringArray = ClientName.toArray(mStringArray);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(advance_search.this, android.R.layout.simple_spinner_item, mStringArray);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mechanicspinner.setAdapter(adapter);
+            searchclient.setAdapter(adapter);
 
         }
     }
 
-    public class forwardtomechanic extends AsyncTask<String, String, String> {
+    public class advancedSearch extends AsyncTask<String, String, String> {
         String db_url;
-
 
         @Override
         protected void onPreExecute() {
-            // progressDialog= ProgressDialog.show(getApplicationContext(), "", "Loading your orders..", true);
-            db_url = "http://peitahari.000webhostapp.com/forward_mechanic.php";
+            db_url = "http://peitahari.000webhostapp.com/advancedSearch.php";
+            progressDialog = ProgressDialog.show(advance_search.this, "", "Loading orders..", true);
 
         }
 
         @Override
         protected String doInBackground(String... args) {
+            String type,clientid;
+            type = args[0];
+            clientid = args[1];
 
             try {
                 URL url = new URL(db_url);
@@ -212,10 +221,9 @@ public class admin_forward_mechanic extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data_string = URLEncoder.encode("mechanicid", "UTF-8") + "=" + URLEncoder.encode(mechanic_id.toString(), "UTF-8") + "&" +
-                        URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
-                        URLEncoder.encode("itemtype", "UTF-8") + "=" + URLEncoder.encode(itemtype, "UTF-8") + "&" +
-                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8");
+                String data_string = URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") + "&" +
+                        URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(clientid, "UTF-8");
+
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -234,6 +242,39 @@ public class admin_forward_mechanic extends AppCompatActivity {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+                String data = stringBuilder.toString().trim();
+
+                String json;
+
+                InputStream stream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
+                int size = stream.available();
+                byte[] buffer1 = new byte[size];
+                stream.read(buffer1);
+                stream.close();
+
+                json = new String(buffer1, "UTF-8");
+                JSONArray jsonArray = new JSONArray(json);
+
+                for (int i = 0; i <= jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    if (jsonObject.getString("uid") != null) {
+                        cid = jsonObject.getString("clientid");
+                        uid = jsonObject.getString("uid");
+                        itemType = jsonObject.getString("itemtype");
+                        Date = jsonObject.getString("date");
+
+
+                        //array list
+
+                        CID.add(cid);
+                        UID.add(uid);
+                        ITEMTYPE.add(itemType);
+                        DATE.add(Date);
+
+                    }
+                }
+
+
                 return null;
 
 
@@ -241,24 +282,19 @@ public class admin_forward_mechanic extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            setspinnerdata();
-
-
-        }
-
-        private void setspinnerdata() {
-            Toast.makeText(admin_forward_mechanic.this, "Forwarded to mechanic", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(admin_forward_mechanic.this, admin_pending_list.class);
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(i);
-            overridePendingTransition(0, 0);
+            progressDialog.dismiss();
+            RecyclerView recyclerView = findViewById(R.id.recyclerview_advancesearch);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            recyclerView.setAdapter(new adapterSearch(CID,UID,DATE,ITEMTYPE));
 
         }
     }

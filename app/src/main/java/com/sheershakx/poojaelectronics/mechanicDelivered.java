@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class mechanicDelivered extends AppCompatActivity {
     ProgressDialog progressDialog;
     Spinner mechdelv;
-    String mstatus=null;
+    String mstatus = null;
     String clientid, uid, itemtype, date, name, status;
     ArrayList<String> ClientID = new ArrayList<String>();
     ArrayList<String> UID = new ArrayList<String>();
@@ -67,7 +67,7 @@ public class mechanicDelivered extends AppCompatActivity {
                 Name.clear();
                 Status.clear();
 
-                Integer idtosend=Integer.parseInt(ID.get(position));
+                Integer idtosend = Integer.parseInt(ID.get(position));
                 new mdelivered().execute(Integer.toString(idtosend));
             }
 
@@ -143,7 +143,7 @@ public class mechanicDelivered extends AppCompatActivity {
                         date = jsonObject.getString("date");
                         name = jsonObject.getString("name");
                         status = jsonObject.getString("adminstatus");
-mstatus="a";
+                        mstatus = "a";
 
                         //array list
 
@@ -178,7 +178,7 @@ mstatus="a";
             progressDialog.dismiss();
             RecyclerView recyclerView = findViewById(R.id.recycler_mdelivered);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name, Status,MStatus));
+            recyclerView.setAdapter(new adapterAdminReport(ClientID, UID, ItemType, Date, Name, Status, MStatus));
 
         }
     }

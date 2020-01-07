@@ -101,6 +101,9 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
                 intent.putExtra("astatus", Astatus);
                 intent.putExtra("mstatus", Mstatus);
                 context.startActivity(intent);
+                ((admin_pending_list)context).finish();
+
+
 
 
             }

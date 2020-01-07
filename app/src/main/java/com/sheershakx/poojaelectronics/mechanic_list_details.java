@@ -229,7 +229,7 @@ public class mechanic_list_details extends AppCompatActivity {
 
             String api_url;
             api_url = args[0];
-            String date = null;
+            String date = "0";
 
             LocalDateTime currdate = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -284,8 +284,11 @@ public class mechanic_list_details extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(mechanic_list_details.this, "Status Changed", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), mechanic_pending_list.class));
+            Intent i = new Intent(mechanic_list_details.this, mechanic_pending_list.class);
             finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -346,7 +349,12 @@ public class mechanic_list_details extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Intent i = new Intent(mechanic_list_details.this, mechanic_pending_list.class);
             finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
+
 
 
         }

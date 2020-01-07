@@ -234,7 +234,7 @@ public class admin_report_detail extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
-            String date = null;
+            String date = "0";
 
             LocalDateTime currdate = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -305,7 +305,7 @@ public class admin_report_detail extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
-            String date = null;
+            String date = "0";
 
             LocalDateTime currdate = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

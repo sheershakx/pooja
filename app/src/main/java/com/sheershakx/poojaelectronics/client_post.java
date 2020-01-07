@@ -74,13 +74,13 @@ public class client_post extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radiogroup_client);
 
-
+String Date="0";
         LocalDateTime currdate = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             currdate = LocalDateTime.now();
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
+             Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
             date.setText(Date);
 
         }

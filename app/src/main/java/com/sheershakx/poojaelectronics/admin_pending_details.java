@@ -246,7 +246,7 @@ public class admin_pending_details extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
-            String date = null;
+            String date = "0";
 
             LocalDateTime currdate = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -298,7 +298,11 @@ public class admin_pending_details extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Intent i = new Intent(admin_pending_details.this, admin_pending_list.class);
             finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
 
 
 
@@ -319,7 +323,7 @@ public class admin_pending_details extends AppCompatActivity {
             String reason;
             reason=args[0];
 
-            String date = null;
+            String date = "0";
 
             LocalDateTime currdate = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -372,7 +376,11 @@ public class admin_pending_details extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Intent i = new Intent(admin_pending_details.this, admin_pending_list.class);
             finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
 
 
 

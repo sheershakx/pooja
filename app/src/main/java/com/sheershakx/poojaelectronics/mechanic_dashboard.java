@@ -93,7 +93,7 @@ public class mechanic_dashboard extends AppCompatActivity {
 
             }
         });
-        String date = null;
+        String date = "0";
 
         LocalDateTime currdate = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

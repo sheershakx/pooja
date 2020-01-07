@@ -95,6 +95,7 @@ public class adapterAdminReport extends RecyclerView.Adapter<adapterAdminReport.
                 context.startActivity(intent);
 
 
+
             }
         });
     }

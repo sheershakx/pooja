@@ -21,6 +21,10 @@
         app:showAsAction="never"
         android:title="View Users"/>
     <item
+        android:id="@+id/menu_search"
+        app:showAsAction="never"
+        android:title="Search data"/>s
+    <item
 
         android:id="@+id/menu_aboutus"
         app:showAsAction="never"

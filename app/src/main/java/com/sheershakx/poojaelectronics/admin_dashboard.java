@@ -138,6 +138,9 @@ public class admin_dashboard extends AppCompatActivity {
             case R.id.menu_userlist:
                 startActivity(new Intent(getApplicationContext(), userlist.class));
                 return true;
+            case R.id.menu_search:
+                startActivity(new Intent(getApplicationContext(), advance_search.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

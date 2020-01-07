@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".userlist"></activity>
+        <activity android:name=".advance_search"></activity>
+        <activity android:name=".userlist" />
         <activity android:name=".login" />
         <activity
             android:name=".addItemGroup"
@@ -47,12 +48,14 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service
             android:name=".MyMessagingService"
             android:exported="false">
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
                 android:resource="@drawable/notify_icon" />
+
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

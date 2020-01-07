@@ -81,7 +81,7 @@ public class mechanic_deliver_action extends AppCompatActivity {
             String problem, cost;
             problem = args[0];
             cost = args[1];
-            String date = null;
+            String date = "0";
 
             LocalDateTime currdate = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -138,7 +138,12 @@ public class mechanic_deliver_action extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(mechanic_deliver_action.this, "Item Delivered", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(mechanic_deliver_action.this, mechanic_dashboard.class);
             finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
+
 
         }
     }

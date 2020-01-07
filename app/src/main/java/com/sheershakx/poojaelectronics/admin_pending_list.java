@@ -147,6 +147,7 @@ ProgressDialog progressDialog;
             recyclerView.setAdapter(new adapterAdminPending(ClientID, UID, ItemType,Date,Name,Status,Astatus,Mstatus));
             progressDialog.dismiss();
 
+
         }
     }
 }
