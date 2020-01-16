@@ -46,7 +46,7 @@
                 android:layout_marginStart="35dp"
                 android:layout_toRightOf="@id/uid_mechanicstatus"
                 android:fontFamily="@font/simonetta"
-                android:text="2019-11-26"
+                android:hint="2019-11-26"
                 android:textColor="@color/Purple"
                 android:textSize="18sp"
                 android:textStyle="bold" />

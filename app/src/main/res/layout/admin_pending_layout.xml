@@ -52,7 +52,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="#168B23"
                 android:fontFamily="@font/simonetta"
-                android:text="2019-11-11"
+                android:hint="2019-11-11"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 

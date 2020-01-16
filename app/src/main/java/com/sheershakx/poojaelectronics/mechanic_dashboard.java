@@ -44,6 +44,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class mechanic_dashboard extends AppCompatActivity {
@@ -93,16 +94,8 @@ public class mechanic_dashboard extends AppCompatActivity {
 
             }
         });
-        String date = "0";
-
-        LocalDateTime currdate = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            currdate = LocalDateTime.now();
-        }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
-            date = Date;
-        }
+        String date = (String) android.text.format.DateFormat.
+                format("yyyy-MM-dd", Calendar.getInstance().getTime());
         currdateshow.setText(date);
 
         new getcount().execute();

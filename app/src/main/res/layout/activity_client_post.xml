@@ -64,7 +64,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/simonetta"
-            android:text="2019-11-26"
+            android:hint="2019-11-26"
             android:textColor="@color/Purple"
             android:textSize="22sp"
             android:textStyle="bold" />

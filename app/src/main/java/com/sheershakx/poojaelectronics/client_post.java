@@ -35,6 +35,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -74,22 +75,15 @@ public class client_post extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radiogroup_client);
 
-String Date="0";
-        LocalDateTime currdate = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            currdate = LocalDateTime.now();
-        }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-             Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
-            date.setText(Date);
+        String Date = (String) android.text.format.DateFormat.
+                format("yyyy-MM-dd", Calendar.getInstance().getTime());
 
-        }
 
         //generating randopm UID
         String randomid = UUID.randomUUID().toString();
         String trimmedrandiomuid = randomid.substring(0, 7);
         uid.setText(trimmedrandiomuid);
-
+        date.setText(Date);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

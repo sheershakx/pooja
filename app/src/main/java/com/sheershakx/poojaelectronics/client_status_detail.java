@@ -26,6 +26,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class client_status_detail extends AppCompatActivity {
@@ -201,16 +202,8 @@ public class client_status_detail extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
-            String date = "0";
-
-            LocalDateTime currdate = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                currdate = LocalDateTime.now();
-            }
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                String Date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(currdate);
-                date = Date;
-            }
+            String date = (String) android.text.format.DateFormat.
+                    format("yyyy-MM-dd", Calendar.getInstance().getTime());
 
             try {
                 URL url = new URL(db_url);
