@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".advance_search"></activity>
+        <activity android:name=".multiple_pending_view"></activity>
+        <activity android:name=".advance_search" />
         <activity android:name=".userlist" />
         <activity android:name=".login" />
         <activity

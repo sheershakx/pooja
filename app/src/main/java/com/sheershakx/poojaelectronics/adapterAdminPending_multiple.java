@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPending.ViewHolder> {
+public class adapterAdminPending_multiple extends RecyclerView.Adapter<adapterAdminPending_multiple.ViewHolder> {
 
     private ArrayList<String> clientid;
     private ArrayList<String> uid;
@@ -24,10 +24,10 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
     private ArrayList<String> status;
     private ArrayList<String> astatus;
     private ArrayList<String> mstatus;
-    private ArrayList<String> groupid;
 
 
-    public adapterAdminPending(ArrayList<String> clientiid, ArrayList<String> uid, ArrayList<String> itemtype, ArrayList<String> date, ArrayList<String> name, ArrayList<String> status, ArrayList<String> astatus, ArrayList<String> mstatus, ArrayList<String> groupid) {
+
+    public adapterAdminPending_multiple(ArrayList<String> clientiid, ArrayList<String> uid, ArrayList<String> itemtype, ArrayList<String> date, ArrayList<String> name, ArrayList<String> status, ArrayList<String> astatus, ArrayList<String> mstatus) {
         this.clientid = clientiid;
         this.uid = uid;
         this.itemtype = itemtype;
@@ -36,7 +36,7 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
         this.status = status;
         this.astatus = astatus;
         this.mstatus = mstatus;
-        this.groupid = groupid;
+
     }
 
     @NonNull
@@ -61,20 +61,13 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
         final String Status = status.get(position);
         final String Astatus = astatus.get(position);
         final String Mstatus = mstatus.get(position);
-        final String Groupid = groupid.get(position);
 
-        if (Groupid != null && Groupid.equals("0")) {
-            holder.name.setText(Name);
-            holder.itemtype.setText(Itemtype);
-            holder.date.setText(Date);
-        }
 
-        if (Groupid != null && !Groupid.equals("0")) {
-            holder.name.setText(Name);
-            holder.itemtype.setText("Multiple Items");
-            holder.date.setText(Date);
+        holder.name.setText(Name);
+        holder.itemtype.setText(Itemtype);
+        holder.date.setText(Date);
 
-        }
+
         if (Status != null && Status.equals("0")) {
             holder.status.setTextColor(Color.parseColor("#ff0000"));
             holder.status.setText("Pending");
@@ -104,33 +97,22 @@ public class adapterAdminPending extends RecyclerView.Adapter<adapterAdminPendin
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(context, admin_pending_details.class);
+                    intent.putExtra("uid", Uid);
+                    intent.putExtra("clientid", Clientid);
+                    intent.putExtra("status", Status);
+                    intent.putExtra("astatus", Astatus);
+                    intent.putExtra("mstatus", Mstatus);
+                    context.startActivity(intent);
 
-                    if (Groupid != null && Groupid.equals("0")) {
-                        Intent intent = new Intent(context, admin_pending_details.class);
-                        intent.putExtra("uid", Uid);
-                        intent.putExtra("clientid", Clientid);
-                        intent.putExtra("status", Status);
-                        intent.putExtra("astatus", Astatus);
-                        intent.putExtra("mstatus", Mstatus);
-                        context.startActivity(intent);
-                        ((admin_pending_list) context).finish();
-                    } else if (Groupid != null && !Groupid.equals("0")) {
-                        Intent intent = new Intent(context, multiple_pending_view.class);
-                        intent.putExtra("groupid", Groupid);
-                        context.startActivity(intent);
-                        ((admin_pending_list) context).finish();
-
-                    }
 
 
                 }
             });
 
 
-
-
-
     }
+
 
     @Override
     public int getItemCount() {

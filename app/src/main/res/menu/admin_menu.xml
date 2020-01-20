@@ -6,6 +6,13 @@
 <!--        app:showAsAction="ifRoom"-->
 <!--        android:title="Add">-->
 <!--    </item>-->
+
+    <item
+        android:id="@+id/menu_clientpost"
+        app:showAsAction="always"
+        android:title="Client's View">
+    </item>
+
     <item
         android:id="@+id/menu_forgotpass"
         app:showAsAction="never"
@@ -23,7 +30,7 @@
     <item
         android:id="@+id/menu_search"
         app:showAsAction="never"
-        android:title="Search data"/>s
+        android:title="Advanced Search"/>
     <item
 
         android:id="@+id/menu_aboutus"

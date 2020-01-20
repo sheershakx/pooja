@@ -65,11 +65,13 @@ public class adapterUserlist extends RecyclerView.Adapter<adapterUserlist.ViewHo
             holder.type.setText("Client");
         }
 
-        if (Activestatus!=null && Activestatus.equals("0")){
+        if (Activestatus!=null && Activestatus.equals("0")){        //if enabled
             holder.enable.setVisibility(View.GONE);
+            holder.disable.setVisibility(View.VISIBLE);
         }
-        else  if (Activestatus!=null && Activestatus.equals("1")){
+        else  if (Activestatus!=null && Activestatus.equals("1")){      //if disabled
             holder.disable.setVisibility(View.GONE);
+            holder.enable.setVisibility(View.VISIBLE);
         }
 
         holder.enable.setOnClickListener(new View.OnClickListener() {

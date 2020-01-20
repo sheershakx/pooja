@@ -30,13 +30,13 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="15dp"
                     android:fontFamily="@font/simonetta"
-                    android:text="Type:"
+                    android:text="Mechanic:"
                     android:textColor="@color/Purple"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/search_type"
+                    android:id="@+id/search_mechanic"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:layout_marginLeft="5dp"
@@ -71,6 +71,31 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/simonetta"
 
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/simonetta"
+                    android:text="Itemtype:"
+                    android:textColor="@color/Purple"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/search_itemtype"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/simonetta"
                     android:textColor="#000"
                     android:textSize="18sp" />
 

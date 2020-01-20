@@ -118,6 +118,7 @@ public class admin_pending_details extends AppCompatActivity {
             status = intent.getStringExtra("status");
             astatus = intent.getStringExtra("astatus");
             mstatus = intent.getStringExtra("mstatus");
+
             new adminpendingdetails().execute();
         }
     }

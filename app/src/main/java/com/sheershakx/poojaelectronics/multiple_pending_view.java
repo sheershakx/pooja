@@ -1,6 +1,7 @@
 package com.sheershakx.poojaelectronics;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -27,9 +28,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class admin_pending_list extends AppCompatActivity {
-ProgressDialog progressDialog;
-    String clientid,uid,itemtype,date,name,status,astatus,mstatus,groupid;
+public class multiple_pending_view extends AppCompatActivity {
+    ProgressDialog progressDialog;
+    String  groupid;
+
+    String clientid,uid,itemtype,date,name,status,astatus,mstatus;
     ArrayList<String> ClientID=new ArrayList<String>();
     ArrayList<String> UID=new ArrayList<String>();
     ArrayList<String> Date=new ArrayList<String>();
@@ -38,22 +41,32 @@ ProgressDialog progressDialog;
     ArrayList<String> Status=new ArrayList<String>();
     ArrayList<String> Astatus=new ArrayList<String>();
     ArrayList<String> Mstatus=new ArrayList<String>();
-    ArrayList<String> GroupID=new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_pending_list);
-        new admin_pending().execute();
+        setContentView(R.layout.activity_multiple_pending_view);
+
+        getincomingintent();
     }
 
-    public class admin_pending extends AsyncTask<String, String, String> {
+    private void getincomingintent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("groupid")) {
+            groupid = intent.getStringExtra("groupid");
+
+            new getfilteredpost().execute();
+        }
+    }
+
+    public class getfilteredpost extends AsyncTask<String, String, String> {
         String db_url;
 
 
         @Override
         protected void onPreExecute() {
-            progressDialog=ProgressDialog.show(admin_pending_list.this,"","Loading orders..",true);
-            db_url = "http://peitahari.000webhostapp.com/admin_pending.php";
+            progressDialog= ProgressDialog.show(multiple_pending_view.this,"","Loading orders..",true);
+            db_url = "http://peitahari.000webhostapp.com/admin_pending_multiple.php";
 
         }
 
@@ -68,6 +81,8 @@ ProgressDialog progressDialog;
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data_string = URLEncoder.encode("groupid", "UTF-8") + "=" + URLEncoder.encode(groupid, "UTF-8");
+                bufferedWriter.write(data_string);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
@@ -109,7 +124,7 @@ ProgressDialog progressDialog;
                         status = jsonObject.getString("userstatus");
                         astatus = jsonObject.getString("adminstatus");
                         mstatus = jsonObject.getString("mechanicstatus");
-                        groupid = jsonObject.getString("groupid");
+
 
 
 
@@ -123,7 +138,7 @@ ProgressDialog progressDialog;
                         Status.add(status);
                         Astatus.add(astatus);
                         Mstatus.add(mstatus);
-                        GroupID.add(groupid);
+
 
                     }
                 }
@@ -139,15 +154,14 @@ ProgressDialog progressDialog;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            RecyclerView recyclerView = findViewById(R.id.recycler_admin_pending);
+            RecyclerView recyclerView = findViewById(R.id.recyclerview_multipleView);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            recyclerView.setAdapter(new adapterAdminPending(ClientID, UID, ItemType,Date,Name,Status,Astatus,Mstatus,GroupID));
+            recyclerView.setAdapter(new adapterAdminPending_multiple(ClientID, UID, ItemType,Date,Name,Status,Astatus,Mstatus));
             progressDialog.dismiss();
 
 
