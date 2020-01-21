@@ -202,8 +202,7 @@ public class client_status_detail extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
-            String date = (String) android.text.format.DateFormat.
-                    format("yyyy-MM-dd", Calendar.getInstance().getTime());
+
 
             try {
                 URL url = new URL(db_url);
@@ -214,7 +213,7 @@ public class client_status_detail extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
-                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8");
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(login.nepalidate, "UTF-8");
 
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();

@@ -94,9 +94,7 @@ public class mechanic_dashboard extends AppCompatActivity {
 
             }
         });
-        String date = (String) android.text.format.DateFormat.
-                format("yyyy-MM-dd", Calendar.getInstance().getTime());
-        currdateshow.setText(date);
+        currdateshow.setText(login.nepalidate);
 
         new getcount().execute();
         new mechanicdashboard().execute();

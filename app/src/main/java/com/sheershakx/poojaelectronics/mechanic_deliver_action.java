@@ -82,8 +82,7 @@ public class mechanic_deliver_action extends AppCompatActivity {
             String problem, cost;
             problem = args[0];
             cost = args[1];
-            String date = (String) android.text.format.DateFormat.
-                    format("yyyy-MM-dd", Calendar.getInstance().getTime());
+
 
 
             try {
@@ -95,7 +94,7 @@ public class mechanic_deliver_action extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
-                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(login.nepalidate, "UTF-8") + "&" +
                         URLEncoder.encode("problem", "UTF-8") + "=" + URLEncoder.encode(problem, "UTF-8") + "&" +
                         URLEncoder.encode("cost", "UTF-8") + "=" + URLEncoder.encode(cost, "UTF-8");
 

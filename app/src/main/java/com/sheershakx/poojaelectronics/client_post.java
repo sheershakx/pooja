@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -17,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.UUID;
 
 public class client_post extends AppCompatActivity {
@@ -46,16 +46,29 @@ public class client_post extends AppCompatActivity {
     CheckBox checkBox;
     EditText spec, serialno, sizeno, model, problem;
     RadioGroup radioGroup;
-    Button expand;
+    Button addnew;
     LinearLayout expandableLayout;
     String radiotext;
-    Boolean multiple = null;
     TextView groupId;
 
     String itemgroup, id, Clientname;
     ArrayList<String> ItemGroup = new ArrayList<String>();
     ArrayList<String> CCID = new ArrayList<String>();
     ArrayList<String> ClientName = new ArrayList<String>();
+
+    //
+    String grpUID;
+
+
+    ArrayList<String> ITEMTYPE = new ArrayList<String>();
+    ArrayList<String> UID = new ArrayList<String>();
+    ArrayList<String> CURRDATE = new ArrayList<String>();
+    ArrayList<String> SERIALNO = new ArrayList<String>();
+    ArrayList<String> SIZENO = new ArrayList<String>();
+    ArrayList<String> MODEL = new ArrayList<String>();
+    ArrayList<String> PROBLEM = new ArrayList<String>();
+    ArrayList<String> SPEC = new ArrayList<String>();
+    ArrayList<String> RADIOTEXT = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +93,13 @@ public class client_post extends AppCompatActivity {
         model = findViewById(R.id.model_clientpost);
 
         expandableLayout = findViewById(R.id.expandableLayout);
-        expandableLayout.setVisibility(View.GONE);
-        expand = findViewById(R.id.btn_expand);
+        addnew = findViewById(R.id.btn_addnew);
 
         radioGroup = findViewById(R.id.radiogroup_client);
         checkBox = findViewById(R.id.checkbox);
 
         groupId = findViewById(R.id.grpid);
+
 
         if (login.usertype != null && login.usertype.equals("0")) {
             clientname.setVisibility(View.VISIBLE);
@@ -97,31 +110,18 @@ public class client_post extends AppCompatActivity {
         new getitemgroup().execute();
         new getclientname().execute();
 /////////////////////////////
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked == true) {
-                    //generating random grp id
-                    String randomid = UUID.randomUUID().toString();
-                    String trimmedrandiomuid = randomid.substring(0, 5);
-                    groupId.setText(trimmedrandiomuid);
-                    multiple = true;
-                }
-                if (isChecked == false) {
-                    groupId.setText("");
-                    multiple = false;
-                }
-            }
-        });
-        String Date = (String) android.text.format.DateFormat.
-                format("yyyy-MM-dd", Calendar.getInstance().getTime());
+
+
+        //generating random grp id
+        String randomidGRP = UUID.randomUUID().toString();
+        grpUID = randomidGRP.substring(0, 5);
 
 
         //generating randopm UID
         String randomid = UUID.randomUUID().toString();
         String trimmedrandiomuid = randomid.substring(0, 7);
         uid.setText(trimmedrandiomuid);
-        date.setText(Date);
+        date.setText(login.nepalidate);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -131,26 +131,10 @@ public class client_post extends AppCompatActivity {
         });
 
         //expand btn on click listener
-        expand.setOnClickListener(new View.OnClickListener() {
+        addnew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (expandableLayout.isShown()) {
 
-
-                } else if (!expandableLayout.isShown()) {
-                    expandableLayout.setVisibility(View.VISIBLE);
-                    //generating randopm UID
-                    String randomid = UUID.randomUUID().toString();
-                    String trimmedrandiomuid = randomid.substring(0, 7);
-                    uid.setText(trimmedrandiomuid);
-
-                }
-            }
-        });
-        //post item button action
-        post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 String Uid = uid.getText().toString();
                 String currdate = date.getText().toString();
                 String Itemtype = itemtype.getSelectedItem().toString().trim();
@@ -160,33 +144,79 @@ public class client_post extends AppCompatActivity {
                 String Problem = problem.getText().toString().trim();
                 String specification = spec.getText().toString();
 
-                if (login.usertype != null && login.usertype.equals("2")) {
-                    if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(Problem) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
-                        if (multiple!=null && multiple == true) {
-                            new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype, Serialno, Sizeno, Modelno, Problem, groupId.getText().toString(), login.userid);
-                        } else {
-                            new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype, Serialno, Sizeno, Modelno, Problem, "0", login.userid);
-                            post.setEnabled(false);
-                        }
-                    } else
-                        Toast.makeText(client_post.this, "Fields cannot be blank", Toast.LENGTH_SHORT).show();
+                if (!TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(Problem) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
 
-                } else if (login.usertype != null && login.usertype.equals("0")) {
+                    ITEMTYPE.add(Itemtype);
+                    UID.add(Uid);
+                    CURRDATE.add(currdate);
+                    SERIALNO.add(Serialno);
+                    SIZENO.add(Sizeno);
+                    MODEL.add(Modelno);
+                    PROBLEM.add(Problem);
+                    SPEC.add(specification);
+                    RADIOTEXT.add(radiotext);
 
-                    Integer position = itemtype.getSelectedItemPosition();
-                    Integer idtosend = Integer.parseInt(CCID.get(position));
-                    if (!TextUtils.isEmpty(Uid) && !TextUtils.isEmpty(Problem) && !TextUtils.isEmpty(currdate) && !TextUtils.isEmpty(specification) && !TextUtils.isEmpty(radiotext) && !TextUtils.isEmpty(Itemtype)) {
-                        if ( multiple!=null && multiple == true) {
-                            new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype, Serialno, Sizeno, Modelno, Problem, groupId.getText().toString(), Integer.toString(idtosend));
-                        } else {
-                            new postproblem().execute(Uid, currdate, specification, radiotext, Itemtype, Serialno, Sizeno, Modelno, Problem, "0", Integer.toString(idtosend));
-                            post.setEnabled(false);
-                        }
-                    } else
-                        Toast.makeText(client_post.this, "Fields cannot be blank", Toast.LENGTH_SHORT).show();
-                }
+                    displayintablebelow();
+                    //generating random UID
+                    String randomid = UUID.randomUUID().toString();
+                    String trimmedrandiomuid = randomid.substring(0, 7);
+                    uid.setText(trimmedrandiomuid);
+
+                    serialno.setText("");
+                    sizeno.setText("");
+                    model.setText("");
+                    spec.setText("");
+                    problem.setText("");
+
+                } else
+                    Toast.makeText(client_post.this, "* are compulsory", Toast.LENGTH_SHORT).show();
+
             }
+
         });
+        //post item button action
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer position = clientname.getSelectedItemPosition();
+                Integer idtosend = Integer.parseInt(CCID.get(position));
+
+
+                if (PROBLEM.size() >= 2) {
+
+                    for (int i = 0; i < PROBLEM.size(); i++) {
+                        if (login.usertype != null && login.usertype.equals("2")) {
+                            new postproblem().execute(UID.get(i), CURRDATE.get(i), SPEC.get(i), RADIOTEXT.get(i), ITEMTYPE.get(i), SERIALNO.get(i), SIZENO.get(i), MODEL.get(i), PROBLEM.get(i), grpUID, login.userid);
+                        } else if (login.usertype != null && login.usertype.equals("0")) {
+                            new postproblem().execute(UID.get(i), CURRDATE.get(i), SPEC.get(i), RADIOTEXT.get(i), ITEMTYPE.get(i), SERIALNO.get(i), SIZENO.get(i), MODEL.get(i), PROBLEM.get(i), grpUID, Integer.toString(idtosend));
+
+                        }
+                    }
+                }
+                else if (PROBLEM.size() ==1) {
+
+                    for (int i = 0; i < PROBLEM.size(); i++) {
+                        if (login.usertype != null && login.usertype.equals("2")) {
+                            new postproblem().execute(UID.get(i), CURRDATE.get(i), SPEC.get(i), RADIOTEXT.get(i), ITEMTYPE.get(i), SERIALNO.get(i), SIZENO.get(i), MODEL.get(i), PROBLEM.get(i), "0", login.userid);
+                        } else if (login.usertype != null && login.usertype.equals("0")) {
+                            new postproblem().execute(UID.get(i), CURRDATE.get(i), SPEC.get(i), RADIOTEXT.get(i), ITEMTYPE.get(i), SERIALNO.get(i), SIZENO.get(i), MODEL.get(i), PROBLEM.get(i), "0", Integer.toString(idtosend));
+
+                        }
+                    }
+                }
+                else Toast.makeText(client_post.this, "Please add at least 1 item to Save", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+        });
+    }
+
+    public void displayintablebelow() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_postclient);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(new adapterPostTable(ITEMTYPE, SERIALNO, SIZENO, MODEL, PROBLEM, SPEC));
+
     }
 
     public class getclientname extends AsyncTask<String, String, String> {
@@ -417,8 +447,8 @@ public class client_post extends AppCompatActivity {
             String groupid = args[9];
             String userid = args[10];
 
-
             try {
+
                 URL url = new URL(db_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -462,18 +492,8 @@ public class client_post extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(client_post.this, "Posted", Toast.LENGTH_SHORT).show();
+            finish();
 
-            // checking if post is single item or multiple item targeted
-            if (multiple!=null && multiple==true) {    //for mulltiple item, activity wont be finished
-                spec.setText("");
-                problem.setText("");
-                model.setText("");
-                sizeno.setText("");
-                serialno.setText("");
-                expandableLayout.setVisibility(View.GONE);
-            } else {
-                finish();               //for single item, the activity will be finished
-            }
         }
     }
 }

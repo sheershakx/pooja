@@ -230,8 +230,7 @@ public class mechanic_list_details extends AppCompatActivity {
 
             String api_url;
             api_url = args[0];
-            String date = (String) android.text.format.DateFormat.
-                    format("yyyy-MM-dd", Calendar.getInstance().getTime());
+
 
 
             try {
@@ -243,7 +242,7 @@ public class mechanic_list_details extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data_string = URLEncoder.encode("uid", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8") + "&" +
-                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8") + "&" +
+                        URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(login.nepalidate, "UTF-8") + "&" +
                         URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(login.userid, "UTF-8");
                 bufferedWriter.write(data_string);
                 bufferedWriter.flush();

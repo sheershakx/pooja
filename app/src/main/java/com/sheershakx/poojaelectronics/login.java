@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Calendar;
 
 public class login extends AppCompatActivity {
     EditText mobile, password;
@@ -41,6 +42,7 @@ public class login extends AppCompatActivity {
     public static String userid;
     public static String username;
     public static String notify;
+    public static String nepalidate;
 
     NotificationManagerCompat notificationManager;
 
@@ -55,6 +57,7 @@ public class login extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginbtn = findViewById(R.id.login);
 
+        getNepaliDate();
 
         //signup process
         loginbtn.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +77,24 @@ public class login extends AppCompatActivity {
 
     }
 
-    private void createNotificationChannels() {
+    //function to convert today's english date into nepali date
+
+    private void getNepaliDate() {
+        String year = (String) android.text.format.DateFormat.
+                format("yyyy", Calendar.getInstance().getTime());
+
+        String month = (String) android.text.format.DateFormat.
+                format("MM", Calendar.getInstance().getTime());
+
+        String date = (String) android.text.format.DateFormat.
+                format("dd", Calendar.getInstance().getTime());
+
+        com.sheershakx.poojaelectronics.date datex=new date();                           //date converter calling
+      String[] recvdate=  datex.conversion(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(date));
+       nepalidate=recvdate[0]+"-"+recvdate[1]+"-"+recvdate[2];
+    }
+
+    private void createNotificationChannels() {     //disabled becauase already used in other activity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(CHANNEL_1_ID, "Channel 1", NotificationManager.IMPORTANCE_HIGH);
             channel1.setDescription("This is channel 1");

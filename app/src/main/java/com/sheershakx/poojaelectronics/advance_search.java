@@ -3,10 +3,12 @@ package com.sheershakx.poojaelectronics;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,8 +48,11 @@ public class advance_search extends AppCompatActivity {
     ArrayList<String> MID = new ArrayList<String>();
     ArrayList<String> ClientName = new ArrayList<String>();
 
-    Spinner searchmechanic, searchclient, searchitem;
+    AutoCompleteTextView searchmechanic, searchclient;
+    AutoCompleteTextView searchitem;
     Button searchbtn;
+
+    String clientpos, mechanicpos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +78,37 @@ public class advance_search extends AppCompatActivity {
                 ITEMTYPE.clear();
                 DATE.clear();
 
+                String selectedClient = searchclient.getText().toString().trim();
+                String selectedMechanic = searchmechanic.getText().toString().trim();
+
+                //finding corresponding array position for selected text in autocomplete textview
+                for (int i = 0; i < CCID.size(); i++) {                     //for client
+                    if (selectedClient.equals(ClientName.get(i))) {
+                        clientpos = CCID.get(i);
+                    }
+                }
+
+
+                for (int i = 0; i < MID.size(); i++) {                     //for mechanic
+                    if (selectedMechanic.equals(MechanicName.get(i))) {
+                        mechanicpos = MID.get(i);
+                    }
+                }
 
                 //for client to client id conversion
-                Integer position = searchclient.getSelectedItemPosition();
-                Integer idtosend = Integer.parseInt(CCID.get(position));
+                //    Integer position = searchclient.getSelectedItemPosition();
+                //   Integer idtosend = Integer.parseInt(CCID.get(position));
 
                 //for mechanic to mechanic id conversion
-                Integer position_new = searchmechanic.getSelectedItemPosition();
-                Integer idtosend_new = Integer.parseInt(MID.get(position_new));
+                //   Integer position_new = searchmechanic.getSelectedItemPosition();
+                //   Integer idtosend_new = Integer.parseInt(MID.get(position_new));
 
                 //get itemtype selected string and trim
-                String selectedItem = searchitem.getSelectedItem().toString().trim();
-
-                new advancedSearch().execute(Integer.toString(idtosend_new), Integer.toString(idtosend), selectedItem);
+                String selectedItem = searchitem.getText().toString().trim();
+                if (clientpos != null && mechanicpos != null && selectedItem != null && !TextUtils.isEmpty(clientpos) && !TextUtils.isEmpty(mechanicpos)  && !TextUtils.isEmpty(selectedItem) ) {
+                    new advancedSearch().execute(mechanicpos, clientpos, selectedItem);
+                   // Toast.makeText(advance_search.this, clientpos+" && "+ mechanicpos, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -188,9 +211,8 @@ public class advance_search extends AppCompatActivity {
             String[] mStringArray = new String[ClientName.size()];
             mStringArray = ClientName.toArray(mStringArray);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(advance_search.this, android.R.layout.simple_spinner_item, mStringArray);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             searchclient.setAdapter(adapter);
-
+            searchclient.setThreshold(1);
         }
     }
 
@@ -290,8 +312,8 @@ public class advance_search extends AppCompatActivity {
             String[] mStringArray = new String[MechanicName.size()];
             mStringArray = MechanicName.toArray(mStringArray);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(advance_search.this, android.R.layout.simple_spinner_item, mStringArray);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             searchmechanic.setAdapter(adapter);
+            searchmechanic.setThreshold(1);
 
         }
     }
@@ -387,8 +409,8 @@ public class advance_search extends AppCompatActivity {
             String[] mStringArray = new String[Itemgroup.size()];
             mStringArray = Itemgroup.toArray(mStringArray);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(advance_search.this, android.R.layout.simple_spinner_item, mStringArray);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             searchitem.setAdapter(adapter);
+            searchitem.setThreshold(1);
 
         }
     }

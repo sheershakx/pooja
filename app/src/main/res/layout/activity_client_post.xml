@@ -28,7 +28,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:background="#4FD558">
 
         <TextView
@@ -51,7 +51,7 @@
             android:fontFamily="@font/simonetta"
             android:hint="2019-11-26"
             android:textColor="@color/Purple"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:fontFamily="@font/simonetta"
             android:text="Date:"
             android:textColor="@color/Purple"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
 
@@ -72,34 +72,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8.2"
+        android:layout_weight="8.4"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_expand"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorAccent"
-            android:text="Add"
-            android:textColor="#fff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="Multiple"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_clientnames"
@@ -160,7 +135,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/simonetta"
-                            android:text="Item Group:"
+                            android:text="Item Group *:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -220,7 +195,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="20dp"
                             android:fontFamily="@font/simonetta"
-                            android:text="Item specification:"
+                            android:text="Item specification *:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -243,7 +218,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="20dp"
                             android:fontFamily="@font/simonetta"
-                            android:text="Problem:"
+                            android:text="Problem *:"
                             android:textColor="@color/Purple"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -290,8 +265,23 @@
 
                         </RadioGroup>
 
+                        <Button
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/btn_addnew"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/radiogroup_client"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/colorAccent"
+                            android:text="Add"
+                            android:textColor="#fff"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <Button
+                            android:layout_marginStart="20dp"
+                            android:layout_toRightOf="@id/btn_addnew"
                             android:id="@+id/post_btn_client"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -309,6 +299,65 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <TableLayout
+                    android:id="@+id/tbllayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    android:stretchColumns="2">
+
+                    <TableRow android:background="@color/colorAccent">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_column="0"
+                            android:layout_weight="0"
+                            android:text="Group"
+                            android:textAlignment="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+
+                            android:layout_width="127dp"
+                            android:layout_height="match_parent"
+                            android:layout_column="1"
+
+                            android:layout_weight="0"
+
+                            android:text="Specs"
+                            android:textAlignment="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+
+                            android:layout_width="93dp"
+                            android:layout_height="match_parent"
+                            android:layout_column="2"
+
+                            android:layout_weight="0"
+
+                            android:text="Problem"
+                            android:textAlignment="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_postclient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
